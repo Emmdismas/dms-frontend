@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dms-erp-pwa-v5';
+const CACHE_NAME = 'dms-erp-pwa-v6';
 
 const STATIC_ASSETS = [
   '/',

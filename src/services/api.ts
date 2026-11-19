@@ -10,16 +10,20 @@ const DEFAULT_PROD_BACKEND = 'https://dms-dealer-vajw.onrender.com/api/v1';
 
 function resolveApiBaseUrl(): string {
   const env = (import.meta as any).env || {};
-  const rawEnvUrl = (
+  const rawEnvUrl = String(
     env.VITE_API_BASE_URL ||
     env.VITE_API_URL ||
     env.VITE_BACKEND_URL ||
     ''
   ).trim();
 
-  if (rawEnvUrl) {
-    const cleaned = rawEnvUrl.replace(/\/+$/, '');
-    return cleaned.endsWith('/api/v1') ? cleaned : `${cleaned}/api/v1`;
+  // Extract a clean http(s):// origin/path even if pasted with markdown [url](url) or quotes
+  const urlMatch = rawEnvUrl.match(/https?:\/\/[^\s)\]"']+/i);
+  if (urlMatch) {
+    const base = urlMatch[0]
+      .replace(/\/+$/, '')
+      .replace(/\/api(\/v1)?$/i, '');
+    return `${base}/api/v1`;
   }
 
   if (
