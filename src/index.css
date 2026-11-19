@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #006948;
+  --color-primary-container: #00855d;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #f5fff7;
+  
+  --color-secondary: #565e74;
+  --color-secondary-container: #dae2fd;
+  --color-on-secondary-container: #5c647a;
+  
+  --color-tertiary: #006947;
+  --color-tertiary-container: #00855b;
+  --color-on-tertiary-container: #f5fff6;
+  --color-tertiary-fixed: #6ffbbe;
+  --color-tertiary-fixed-dim: #4edea3;
+  --color-on-tertiary-fixed-variant: #005236;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --color-background: #f7f9fb;
+  --color-on-background: #191c1e;
+
+  --color-surface: #f7f9fb;
+  --color-surface-dim: #d8dadc;
+  --color-surface-bright: #f7f9fb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f2f4f6;
+  --color-surface-container: #eceef0;
+  --color-surface-container-high: #e6e8ea;
+  --color-surface-container-highest: #e0e3e5;
+
+  --color-on-surface: #191c1e;
+  --color-on-surface-variant: #3d4a42;
+  --color-surface-variant: #e0e3e5;
+
+  --color-outline: #6d7a72;
+  --color-outline-variant: #bccac0;
+
+  --spacing-sidebar: 280px;
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+
+@layer utilities {
+  .w-sidebar-width {
+    width: 280px;
+  }
+  .ml-sidebar-width {
+    margin-left: 280px;
+  }
+  .px-container-margin {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .p-container-margin {
+    padding: 2rem;
+  }
+  .mb-section-gap {
+    margin-bottom: 2rem;
+  }
+  .gap-gutter {
+    gap: 1.5rem;
+  }
+  .p-card-padding {
+    padding: 1.5rem;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(188, 202, 192, 0.3);
+    box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.05), 0px 2px 4px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.icon-fill {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Custom fine scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Enterprise Table Horizontal Scrollbar */
+.enterprise-scrollbar::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.enterprise-scrollbar::-webkit-scrollbar-track {
+  background: rgba(100, 116, 139, 0.08);
+  border-radius: 4px;
+}
+:where(.dark, .dark *) .enterprise-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+.enterprise-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 105, 72, 0.45);
+  border-radius: 4px;
+}
+.enterprise-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 105, 72, 0.85);
+}
+:where(.dark, .dark *) .enterprise-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.4);
+}
+:where(.dark, .dark *) .enterprise-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.8);
+}
+
+/* Sidebar Responsive Content Shift (Desktop & Tablets >= 768px) */
+@media (min-width: 768px) {
+  .app-sidebar-open {
+    margin-left: 280px !important;
+  }
+}
+
+/* ── Modern Enterprise Transitions & Interactive Micro-Animations ── */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.card-hover-elevate {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+.card-hover-elevate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+:where(.dark, .dark *) .card-hover-elevate:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Sticky Table Header & Custom Scroller Standard (Rule 14 in ENTERPRISE_SYSTEM_RULES.md) ── */
+.dt-kascroller {
+  max-height: 520px;
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: #006948 #f1f5f9;
+}
+:where(.dark, .dark *) .dt-kascroller {
+  scrollbar-color: #10b981 #0f172a;
+}
+.dt-kascroller thead th {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  background-color: #006948 !important;
+  color: #ffffff !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}

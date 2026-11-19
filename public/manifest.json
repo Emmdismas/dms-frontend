@@ -1,0 +1,55 @@
+{
+  "name": "Nassor Salum Abdallah - Dealer ERP",
+  "short_name": "DMS ERP",
+  "description": "Enterprise Motorcycle & Tricycle Dealer Management System",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#090D16",
+  "theme_color": "#006948",
+  "lang": "sw",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/DMS-logo.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["business", "finance", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Daftari la Mauzo",
+      "short_name": "Mauzo",
+      "description": "Fungua daftari la mauzo",
+      "url": "/?tab=sales",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Stoo ya Pikipiki",
+      "short_name": "Stoo",
+      "description": "Kagua stoo na vitengo vilivyopo",
+      "url": "/?tab=inventory",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
