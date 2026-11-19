@@ -6,7 +6,34 @@
  */
 const TOKEN_KEY = 'dms_token';
 const DEALER_CTX_KEY = 'dms_dealer_context';
-const API_BASE_URL = ((import.meta as any).env?.VITE_API_BASE_URL || '/api/v1').replace(/\/+$/, '');
+const DEFAULT_PROD_BACKEND = 'https://dms-dealer-vajw.onrender.com/api/v1';
+
+function resolveApiBaseUrl(): string {
+  const env = (import.meta as any).env || {};
+  const rawEnvUrl = (
+    env.VITE_API_BASE_URL ||
+    env.VITE_API_URL ||
+    env.VITE_BACKEND_URL ||
+    ''
+  ).trim();
+
+  if (rawEnvUrl) {
+    const cleaned = rawEnvUrl.replace(/\/+$/, '');
+    return cleaned.endsWith('/api/v1') ? cleaned : `${cleaned}/api/v1`;
+  }
+
+  if (
+    typeof window !== 'undefined' &&
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1'
+  ) {
+    return DEFAULT_PROD_BACKEND;
+  }
+
+  return '/api/v1';
+}
+
+const API_BASE_URL = resolveApiBaseUrl();
 
 export class ApiError extends Error {
   status: number;
