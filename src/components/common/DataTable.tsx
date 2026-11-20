@@ -85,6 +85,43 @@ export function toProperCase(text: string): string {
     .join(' ');
 }
 
+/** Sleek, modern micro-caret sort indicator (Stripe / DataTables Enterprise standard) */
+const TableSortCaret: React.FC<{ isSorted: boolean; sortOrder: 'asc' | 'desc' }> = ({
+  isSorted,
+  sortOrder,
+}) => (
+  <span className="inline-flex flex-col items-center justify-center ml-1.5 w-2.5 h-3 shrink-0 select-none opacity-85 group-hover:opacity-100">
+    {/* Up Caret */}
+    <svg
+      className={`w-2 h-1.5 transition-colors duration-150 ${
+        isSorted && sortOrder === 'asc'
+          ? 'text-white opacity-100 drop-shadow-[0_0_2px_rgba(255,255,255,0.8)]'
+          : isSorted
+          ? 'text-white/20'
+          : 'text-white/45'
+      }`}
+      viewBox="0 0 8 5"
+      fill="currentColor"
+    >
+      <path d="M4 0L8 5H0L4 0Z" />
+    </svg>
+    {/* Down Caret */}
+    <svg
+      className={`w-2 h-1.5 mt-0.5 transition-colors duration-150 ${
+        isSorted && sortOrder === 'desc'
+          ? 'text-white opacity-100 drop-shadow-[0_0_2px_rgba(255,255,255,0.8)]'
+          : isSorted
+          ? 'text-white/20'
+          : 'text-white/45'
+      }`}
+      viewBox="0 0 8 5"
+      fill="currentColor"
+    >
+      <path d="M4 5L0 0H8L4 5Z" />
+    </svg>
+  </span>
+);
+
 export function DataTable<T>({
   data,
   columns,
@@ -446,7 +483,7 @@ export function DataTable<T>({
                       key={colKey}
                       onClick={() => handleSort(colKey, col.sortable)}
                       style={{ width: col.width }}
-                      className={`py-3.5 px-4 text-xs sm:text-[13px] font-bold normal-case tracking-normal text-white border-r border-white/20 last:border-r-0 whitespace-nowrap select-none ${alignClass} ${
+                      className={`group py-3.5 px-4 text-xs sm:text-[13px] font-bold normal-case tracking-normal text-white border-r border-white/20 last:border-r-0 whitespace-nowrap select-none ${alignClass} ${
                         col.sortable
                           ? 'cursor-pointer hover:bg-[#005a3e] transition-colors'
                           : ''
@@ -463,19 +500,7 @@ export function DataTable<T>({
                       >
                         <span className="text-white font-bold tracking-normal">{toProperCase(col.header)}</span>
                         {col.sortable && (
-                          <span
-                            className={`material-symbols-outlined text-[14px] transition-transform ${
-                              isSorted
-                                ? 'text-white font-black scale-110'
-                                : 'text-white/60 hover:text-white'
-                            }`}
-                          >
-                            {isSorted
-                              ? sortOrder === 'asc'
-                                ? 'arrow_upward'
-                                : 'arrow_downward'
-                              : 'unfold_more'}
-                          </span>
+                          <TableSortCaret isSorted={isSorted} sortOrder={sortOrder} />
                         )}
                       </div>
                     </th>
