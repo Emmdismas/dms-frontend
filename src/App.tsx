@@ -77,6 +77,7 @@ export function App() {
         isDarkMode={isDarkMode} 
         language={language}
         onToggleLanguage={handleToggleLanguage}
+        onToggleTheme={handleToggleTheme}
       />
     );
   }
