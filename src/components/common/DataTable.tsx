@@ -236,8 +236,8 @@ export function DataTable<T>({
   };
 
   // Styling helpers
-  const cellPadding = density === 'compact' ? 'py-2 px-3' : 'py-3 px-3.5';
-  const cellFontSize = density === 'compact' ? 'text-[12px]' : 'text-[13px]';
+  const cellPadding = density === 'compact' ? 'py-2.5 px-3.5' : 'py-3.5 px-4';
+  const cellFontSize = density === 'compact' ? 'text-xs' : 'text-sm font-medium';
 
   return (
     <div className="w-full space-y-3">
@@ -486,7 +486,7 @@ export function DataTable<T>({
                         return (
                           <td
                             key={colKey}
-                            className={`${cellPadding} ${cellFontSize} whitespace-nowrap border-r border-slate-200/60 dark:border-slate-800/60 last:border-r-0 text-slate-800 dark:text-slate-200 ${alignClass} ${
+                            className={`${cellPadding} ${cellFontSize} whitespace-nowrap border-r border-slate-200/70 dark:border-slate-800/80 last:border-r-0 text-slate-900 dark:text-slate-100 tabular-nums ${alignClass} ${
                               col.className || ''
                             }`}
                           >

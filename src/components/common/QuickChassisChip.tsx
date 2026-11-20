@@ -33,10 +33,10 @@ export const QuickChassisChip: React.FC<QuickChassisChipProps> = ({
       type="button"
       onClick={handleCopy}
       title="Bofya kunakili (Click to copy)"
-      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md font-mono text-[11px] font-semibold border transition-all cursor-pointer group select-all ${
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-xs font-bold tracking-wider border transition-all cursor-pointer group select-all ${
         copied
-          ? 'bg-emerald-500 text-white border-emerald-600 scale-102 shadow-xs'
-          : 'bg-slate-100 hover:bg-emerald-50 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 hover:text-[#006948] dark:hover:text-emerald-400 border-slate-200 dark:border-slate-700/80 hover:border-emerald-300 dark:hover:border-emerald-600/60 shadow-2xs'
+          ? 'bg-emerald-600 text-white border-emerald-700 scale-102 shadow-xs'
+          : 'bg-slate-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 hover:text-[#006948] dark:hover:text-emerald-400 border-slate-300 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-500 shadow-2xs'
       } ${className}`}
     >
       {copied && (
