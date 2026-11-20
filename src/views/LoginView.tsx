@@ -57,13 +57,13 @@ export const LoginView: React.FC<LoginViewProps> = ({
   return (
     <div className="min-h-screen w-full relative flex flex-col justify-between overflow-x-hidden font-sans select-none">
       {/* ========================================================================= */}
-      {/* 1. BRIGHT REAL AUTOMOTIVE BACKGROUND (Sunlit Dealership, Pikipiki & Bajaji)*/}
+      {/* 1. BRIGHT REAL AUTOMOTIVE BACKGROUND (With Smooth Entrance Zoom Animation)*/}
       {/* ========================================================================= */}
       <div className="fixed inset-0 z-0 pointer-events-none select-none overflow-hidden">
         <img
           src="/dms-hero-bg.jpg"
-          alt="DMS Dealership Vehicles - Pikipiki & Bajaji"
-          className="w-full h-full object-cover object-center scale-100 filter brightness-95 contrast-[1.02] saturate-[1.08] transition-transform duration-700"
+          alt="DMS Dealership Vehicles - Motorcycles & Tricycles"
+          className="w-full h-full object-cover object-center animate-bg-zoom filter brightness-95 contrast-[1.02] saturate-[1.08]"
         />
         {/* Soft, natural daylight scrim: light & clear so the sunny photo shines through */}
         <div
@@ -84,9 +84,9 @@ export const LoginView: React.FC<LoginViewProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. TOP GLASS NAVIGATION BAR (Logo, Language, Dark/Light Mode Toggle)     */}
+      {/* 2. TOP GLASS NAVIGATION BAR (Animated Slide-in)                          */}
       {/* ========================================================================= */}
-      <header className="relative z-20 w-full px-4 sm:px-8 py-4">
+      <header className="relative z-20 w-full px-4 sm:px-8 py-4 animate-nav-slide">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 backdrop-blur-xl bg-white/10 dark:bg-black/25 border border-white/20 rounded-2xl px-4 sm:px-6 py-2.5 shadow-lg shadow-black/20">
           {/* Left Brand Identity */}
           <div className="flex items-center gap-3">
@@ -102,7 +102,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                 Dealer <span className="text-emerald-400">Management</span> System
               </div>
               <div className="text-[10px] text-emerald-300 font-semibold tracking-wider uppercase font-mono">
-                2W & 3W ERP • Tanzania
+                2W & 3W ERP • Multi-Brand Platform
               </div>
             </div>
           </div>
@@ -155,24 +155,24 @@ export const LoginView: React.FC<LoginViewProps> = ({
       </header>
 
       {/* ========================================================================= */}
-      {/* 3. MAIN HERO CONTENT (Simple, Clean Left Showcase + Right Glassmorphism)  */}
+      {/* 3. MAIN HERO CONTENT (Animated Entrance & Generalized Categories)        */}
       {/* ========================================================================= */}
       <main className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* ========================================================= */}
-          {/* LEFT: SIMPLE, ELEGANT HERO BRANDING (Over Bright Photo)   */}
+          {/* LEFT: SIMPLE, GENERALIZED HERO (Animated Fade-Up)         */}
           {/* ========================================================= */}
-          <div className="order-2 lg:order-1 w-full lg:col-span-7 xl:col-span-7 space-y-6 text-white text-center lg:text-left">
-            {/* Eyebrow Pill */}
+          <div className="order-2 lg:order-1 w-full lg:col-span-7 xl:col-span-7 space-y-6 text-white text-center lg:text-left animate-hero-fade">
+            {/* Generalized Eyebrow Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full backdrop-blur-md bg-white/15 border border-white/25 text-emerald-300 text-xs font-bold uppercase tracking-wider shadow-lg shadow-black/20">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{isSw ? 'Mfumo Rasmi wa Ma-Dealer' : 'Official Dealership ERP'}</span>
+              <span>{isSw ? 'Mfumo Rasmi wa Ma-Dealer' : 'Commercial Dealership ERP'}</span>
               <span className="text-white/40">•</span>
-              <span>Tanzania</span>
+              <span>{isSw ? 'Pikipiki & Bajaji Nchini' : 'Multi-Brand Fleet Management'}</span>
             </div>
 
-            {/* Clean Inspiring Title (Friendly & Bold, like Image 2) */}
+            {/* Clean Inspiring Title (Universal & Future-Proof) */}
             <h1 className="text-3xl sm:text-4xl xl:text-5xl font-black tracking-tight leading-[1.18] drop-shadow-md">
               {isSw ? (
                 <>
@@ -189,50 +189,54 @@ export const LoginView: React.FC<LoginViewProps> = ({
               )}
             </h1>
 
-            {/* Short, Simple Subtext (No Overwhelming Clutter) */}
+            {/* Short, Generalized Subtext */}
             <p className="text-sm sm:text-base text-white/90 max-w-xl leading-relaxed font-normal mx-auto lg:mx-0 drop-shadow-sm">
               {isSw
-                ? 'Jukwaa la kidijitali la kudhibiti namba za Chassis (VIN), stoo ya matawi nchini, na mauzo ya mikopo na taslimu kwa uwazi na usalama.'
-                : 'Comprehensive digital platform tracking 17-digit Chassis VINs, branch allocations, customer registries, and cash & credit sales.'}
+                ? 'Jukwaa huru la kidijitali la kudhibiti namba za Chassis (VIN), stoo ya matawi nchini, na mauzo ya mikopo na taslimu kwa aina zote za vyombo vya moto.'
+                : 'Universal enterprise platform tracking 17-digit Chassis VINs, nationwide branch inventory, customer registries, and cash & credit sales across all vehicle makes.'}
             </p>
 
-            {/* Simple Vehicle Type Chips */}
+            {/* Universal Category Chips (Generalized: No Brand Lock-In) */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-1">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 text-white text-xs font-semibold shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 text-white text-xs font-semibold shadow-xs">
                 <span className="text-base">🛵</span>
-                <span>2W Pikipiki</span>
+                <span>{isSw ? 'Pikipiki (2-Wheeler)' : 'Two-Wheelers (2W)'}</span>
                 <span className="text-white/40">•</span>
-                <span className="text-emerald-300 font-mono text-[11px]">Boxer & TVS HLX</span>
+                <span className="text-emerald-300 font-mono text-[11px]">
+                  {isSw ? 'Abiria, Mizigo na Boda Boda' : 'Passenger & Commuter Fleets'}
+                </span>
               </div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 text-white text-xs font-semibold shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 text-white text-xs font-semibold shadow-xs">
                 <span className="text-base">🛺</span>
-                <span>3W Bajaji</span>
+                <span>{isSw ? 'Bajaji (3-Wheeler)' : 'Three-Wheelers (3W)'}</span>
                 <span className="text-white/40">•</span>
-                <span className="text-teal-300 font-mono text-[11px]">TVS King & Bajaj RE</span>
+                <span className="text-teal-300 font-mono text-[11px]">
+                  {isSw ? 'Usafiri wa Abiria na Mizigo' : 'Passenger & Cargo Carriers'}
+                </span>
               </div>
             </div>
 
-            {/* Trust Highlights (Clean Bottom Row, like Image 2) */}
+            {/* Universal Trust Highlights */}
             <div className="pt-4 border-t border-white/15 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-white/80 font-medium">
               <span className="flex items-center gap-1.5">
                 <span className="text-emerald-400 font-bold">✓</span>
-                <span>17-Digit VIN Tracking</span>
+                <span>{isSw ? 'Uthibitisho wa VIN ya Tarakimu 17' : '17-Digit VIN Tracking'}</span>
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="text-emerald-400 font-bold">✓</span>
-                <span>Matawi Nchini Kote</span>
+                <span>{isSw ? 'Matawi Yote Nchini' : 'Nationwide Branch Inventory'}</span>
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="text-emerald-400 font-bold">✓</span>
-                <span>TRA & Risiti Tayari</span>
+                <span>{isSw ? 'TRA & Risiti za Kisheria' : 'TRA & Tax Invoice Ready'}</span>
               </span>
             </div>
           </div>
 
           {/* ========================================================================= */}
-          {/* RIGHT: SLEEK FLOATING GLASSMORPHISM LOGIN CARD (Matching Image 2 Style)   */}
+          {/* RIGHT: FLOATING FROSTED GLASS CARD (With Smooth Float-In Animation)       */}
           {/* ========================================================================= */}
-          <div className="order-1 lg:order-2 w-full lg:col-span-5 xl:col-span-5 max-w-md mx-auto lg:max-w-none">
+          <div className="order-1 lg:order-2 w-full lg:col-span-5 xl:col-span-5 max-w-md mx-auto lg:max-w-none animate-card-glass">
             <div className="relative rounded-3xl p-6 sm:p-8 backdrop-blur-2xl bg-slate-900/40 dark:bg-black/55 border border-white/30 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] ring-1 ring-white/15 overflow-hidden">
               {/* Inner ambient glass reflection */}
               <div className="absolute -top-20 -right-20 w-44 h-44 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none" />
@@ -242,15 +246,15 @@ export const LoginView: React.FC<LoginViewProps> = ({
               <div className="relative z-10 mb-6">
                 <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full backdrop-blur-md bg-white/15 border border-white/20 text-emerald-300 text-[11px] font-bold uppercase tracking-wider mb-2.5 shadow-2xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>{isSw ? 'Ingia Kwenye Akaunti' : 'Sign in to Portal'}</span>
+                  <span>{isSw ? 'Ingia Kwenye Mfumo' : 'Enterprise Portal Access'}</span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-                  {isSw ? 'Karibu Kwenye Mfumo' : 'Welcome Back'}
+                  {isSw ? 'Karibu Kwenye Mfumo' : 'Sign In to Account'}
                 </h2>
                 <p className="text-xs text-white/70 mt-1 font-normal">
                   {isSw
                     ? 'Weka barua pepe, namba ya simu au kodi ya dealer.'
-                    : 'Enter your credentials to access your dealership.'}
+                    : 'Enter your email, phone, or dealer code to continue.'}
                 </p>
               </div>
 
@@ -270,7 +274,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                     htmlFor="login-identifier"
                     className="block text-xs font-semibold text-white/90 mb-1.5 cursor-pointer"
                   >
-                    {isSw ? 'Email / Simu / Dealer Code' : 'Email / Phone / Dealer Code'}
+                    {isSw ? 'Barua Pepe / Simu / Kodi ya Dealer' : 'Email / Phone / Dealer Code'}
                   </label>
                   <div className="relative">
                     <span className="material-symbols-outlined absolute left-3.5 top-3 text-white/60 text-lg pointer-events-none select-none">
@@ -301,7 +305,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                       htmlFor="login-password"
                       className="block text-xs font-semibold text-white/90 cursor-pointer"
                     >
-                      {isSw ? 'Nenosiri (Password)' : 'Password'}
+                      {isSw ? 'Nenosiri' : 'Password'}
                     </label>
                   </div>
                   <div className="relative">
@@ -332,7 +336,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                   </div>
                 </div>
 
-                {/* Vibrant High-Energy CTA Button (Matching Image 2 Style) */}
+                {/* Vibrant High-Energy CTA Button */}
                 <button
                   type="submit"
                   disabled={isLoading}
@@ -367,13 +371,13 @@ export const LoginView: React.FC<LoginViewProps> = ({
       </main>
 
       {/* ========================================================================= */}
-      {/* 4. CLEAN BOTTOM BAR                                                       */}
+      {/* 4. CLEAN BOTTOM BAR (Generalized Multi-Brand Attribution)                 */}
       {/* ========================================================================= */}
       <footer className="relative z-20 w-full py-3 px-4 sm:px-8 text-center text-xs text-white/70">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 border-t border-white/10 pt-3">
           <div>© 2026 Dealer Management System (DMS) • Tanzania Operations</div>
           <div className="font-mono text-[11px] text-white/60">
-            TVS & Bajaj Authorized Dealerships Platform
+            Multi-Brand Commercial 2W & 3W Dealership Platform
           </div>
         </div>
       </footer>

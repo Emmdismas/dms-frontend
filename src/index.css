@@ -199,17 +199,55 @@ select:not([multiple]) {
   }
 }
 
-@keyframes subtleFloat {
-  0%, 100% {
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
     transform: translateY(0);
   }
-  50% {
-    transform: translateY(-3px);
+}
+
+@keyframes cardGlassFloat {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bgGentleZoom {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1);
   }
 }
 
 .animate-fade-slide-up {
   animation: fadeSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-hero-fade {
+  animation: heroFadeIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-card-glass {
+  animation: cardGlassFloat 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.animate-nav-slide {
+  animation: heroFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-bg-zoom {
+  animation: bgGentleZoom 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .card-hover-elevate {

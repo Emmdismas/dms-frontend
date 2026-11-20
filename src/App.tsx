@@ -43,10 +43,15 @@ export function App() {
     }
   }, [isDarkMode]);
 
-  // Language State (Swahili / English)
+  // Language State (Default to English as requested)
   const [language, setLanguage] = useState<Language>(() => {
-    return (localStorage.getItem('dealer_app_language') as Language) || 'sw';
+    return (localStorage.getItem('dealer_app_language') as Language) || 'en';
   });
+
+  // Sync html lang attribute
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
 
   const handleToggleLanguage = () => {
     setLanguage((prev) => {
