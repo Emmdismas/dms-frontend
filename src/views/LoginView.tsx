@@ -286,39 +286,204 @@ export const LoginView: React.FC<LoginViewProps> = ({
         isDarkMode ? 'bg-[#060910] text-slate-100' : 'bg-slate-950 text-white'
       }`}
     >
-      {/* Background ambient lighting */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-emerald-600/20 rounded-full blur-[140px] pointer-events-none animate-pulse" />
-      <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-teal-500/15 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute -bottom-40 left-1/3 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-[160px] pointer-events-none" />
+      {/* 1. Full-Bleed Real Automotive Background Image (Pikipiki & Bajaji) */}
+      <div className="fixed inset-0 z-0 pointer-events-none select-none overflow-hidden">
+        <img
+          src="/dms-hero-bg.jpg"
+          alt="DMS Dealership Vehicles - Pikipiki & Bajaji"
+          className="w-full h-full object-cover object-center scale-105 filter brightness-[0.42] contrast-[1.08] saturate-[1.15]"
+        />
+        {/* Cinematic gradient scrims: subtle across screen, deep behind text and card */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/92 via-slate-950/70 to-slate-950/88" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-slate-950/75" />
+      </div>
 
-      {/* Main Split-Screen Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 my-auto">
+      {/* 2. Glassmorphism ambient glow accents */}
+      <div className="fixed -top-40 -left-40 w-96 h-96 bg-emerald-500/20 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="fixed top-1/3 -right-40 w-[520px] h-[520px] bg-teal-500/15 rounded-full blur-[160px] pointer-events-none z-0" />
+      <div className="fixed -bottom-40 left-1/3 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[180px] pointer-events-none z-0" />
+
+      {/* 3. Main Split-Screen Container */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* ========================================================= */}
-          {/* LEFT / MAIN COLUMN: AUTHENTICATION FORM (Desktop & Mobile) */}
-          {/* ========================================================= */}
-          <div className="w-full lg:col-span-5 xl:col-span-5">
-            <div className="backdrop-blur-2xl bg-slate-900/95 border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-emerald-950/80">
+          {/* ========================================================================= */}
+          {/* LEFT COLUMN: BRANDING & 2W/3W SHOWCASE OVER REAL BACKGROUND (Desktop)     */}
+          {/* ========================================================================= */}
+          <div className="order-2 lg:order-1 w-full lg:col-span-7 xl:col-span-7 flex flex-col justify-center space-y-6">
+            
+            {/* Top Showcase Banner with Glass Pill */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full backdrop-blur-md bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold uppercase tracking-wider mb-3 shadow-lg shadow-emerald-950/40">
+                <span className="material-symbols-outlined text-sm text-emerald-400">two_wheeler</span>
+                <span>TVS & BAJAJ COMMERCIAL DEALERSHIPS • TANZANIA</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl xl:text-5xl font-black text-white tracking-tight leading-[1.15] drop-shadow-md">
+                {isSw ? (
+                  <>
+                    Usimamizi Kamili wa <span className="text-emerald-400 underline decoration-emerald-500/40 decoration-wavy underline-offset-8">Pikipiki</span> na <span className="text-teal-300 underline decoration-teal-500/40 decoration-wavy underline-offset-8">Bajaji</span> Nchini Kote
+                  </>
+                ) : (
+                  <>
+                    Complete ERP for <span className="text-emerald-400 underline decoration-emerald-500/40 decoration-wavy underline-offset-8">Motorcycle</span> & <span className="text-teal-300 underline decoration-teal-500/40 decoration-wavy underline-offset-8">Tricycle</span> Dealerships
+                  </>
+                )}
+              </h2>
+              <p className="text-sm sm:text-base text-slate-200 mt-4 max-w-2xl leading-relaxed drop-shadow-sm font-normal">
+                {isSw
+                  ? 'Mfumo mkuu wa kidijitali wa kudhibiti uagizaji wa mizigo, namba za Chassis (VIN) na Engine, stoo za matawi nchini, mauzo ya mikopo na taslimu, pamoja na vibali vya TRA.'
+                  : 'Enterprise dealership management platform tracking commercial 2-Wheelers and 3-Wheelers: 17-digit Chassis verification, branch inventory, cash & lease sales, and tax receipts.'}
+              </p>
+            </div>
+
+            {/* TWO FROSTED GLASS CARDS: PIKIPIKI (2W) & BAJAJI (3W) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
+              {/* CARD 1: PIKIPIKI (2-WHEELERS) */}
+              <div className="group relative rounded-2xl p-5 backdrop-blur-xl bg-slate-950/50 border border-white/15 hover:border-emerald-400/50 shadow-2xl shadow-black/60 transition-all duration-300 hover:scale-[1.01]">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-bold uppercase tracking-wider border border-emerald-400/30">
+                    2W • Pikipiki
+                  </span>
+                  <span className="text-[11px] font-bold text-slate-300 font-mono">110cc – 160cc</span>
+                </div>
+                
+                <h3 className="text-base font-bold text-white tracking-tight mb-0.5">
+                  Boxer & TVS HLX Series
+                </h3>
+                <p className="text-xs text-slate-300 mb-3 font-medium">
+                  {isSw ? 'BM150, HLX 125, Apache RTR, Star City+' : 'BM150, HLX 125, Apache RTR, Star City+'}
+                </p>
+
+                {/* Vector Motorcycle Illustration */}
+                <div className="h-28 w-full flex items-center justify-center py-1 bg-slate-900/60 rounded-xl border border-white/10 mb-3 overflow-hidden backdrop-blur-md">
+                  <MotorcycleVector className="w-full h-full max-h-24 transition-transform group-hover:scale-105 duration-300" />
+                </div>
+
+                {/* Spec Pills */}
+                <div className="flex flex-wrap gap-1.5">
+                  <span className="px-2 py-0.5 rounded-md bg-white/10 text-slate-200 text-[10px] font-semibold border border-white/15">
+                    Boda Boda Fleet
+                  </span>
+                  <span className="px-2 py-0.5 rounded-md bg-white/10 text-slate-200 text-[10px] font-semibold border border-white/15">
+                    Chassis & Engine VIN
+                  </span>
+                  <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-[10px] font-semibold border border-emerald-400/30">
+                    Live Stock
+                  </span>
+                </div>
+              </div>
+
+              {/* CARD 2: BAJAJI (3-WHEELERS) */}
+              <div className="group relative rounded-2xl p-5 backdrop-blur-xl bg-slate-950/50 border border-white/15 hover:border-teal-400/50 shadow-2xl shadow-black/60 transition-all duration-300 hover:scale-[1.01]">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="px-2.5 py-0.5 rounded-md bg-teal-500/20 text-teal-300 font-mono text-[11px] font-bold uppercase tracking-wider border border-teal-400/30">
+                    3W • Bajaji
+                  </span>
+                  <span className="text-[11px] font-bold text-slate-300 font-mono">200cc 4S EFI</span>
+                </div>
+                
+                <h3 className="text-base font-bold text-white tracking-tight mb-0.5">
+                  TVS King & Bajaj RE 4S
+                </h3>
+                <p className="text-xs text-slate-300 mb-3 font-medium">
+                  {isSw ? 'King Deluxe, Bajaj RE 4S, King Kargo 200' : 'King Deluxe, Bajaj RE 4S, King Kargo 200'}
+                </p>
+
+                {/* Vector Bajaji Illustration */}
+                <div className="h-28 w-full flex items-center justify-center py-1 bg-slate-900/60 rounded-xl border border-white/10 mb-3 overflow-hidden backdrop-blur-md">
+                  <BajajiVector className="w-full h-full max-h-24 transition-transform group-hover:scale-105 duration-300" />
+                </div>
+
+                {/* Spec Pills */}
+                <div className="flex flex-wrap gap-1.5">
+                  <span className="px-2 py-0.5 rounded-md bg-white/10 text-slate-200 text-[10px] font-semibold border border-white/15">
+                    Passenger & Cargo
+                  </span>
+                  <span className="px-2 py-0.5 rounded-md bg-white/10 text-slate-200 text-[10px] font-semibold border border-white/15">
+                    PDI Inspection
+                  </span>
+                  <span className="px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-300 text-[10px] font-semibold border border-teal-400/30">
+                    TRA Ready
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            {/* 4 FROSTED GLASS CAPABILITY HIGHLIGHTS */}
+            <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 pt-2">
+              <div className="p-3 rounded-xl backdrop-blur-lg bg-slate-950/45 border border-white/15 flex items-start gap-2.5">
+                <span className="material-symbols-outlined text-emerald-400 text-lg mt-0.5">pin</span>
+                <div>
+                  <h4 className="text-xs font-bold text-white leading-tight">Chassis & VIN</h4>
+                  <p className="text-[10px] text-slate-300 mt-0.5">
+                    {isSw ? 'Uthibitisho wa tarakimu 17' : '17-digit serial lock'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl backdrop-blur-lg bg-slate-950/45 border border-white/15 flex items-start gap-2.5">
+                <span className="material-symbols-outlined text-emerald-400 text-lg mt-0.5">storefront</span>
+                <div>
+                  <h4 className="text-xs font-bold text-white leading-tight">Matawi Nchini</h4>
+                  <p className="text-[10px] text-slate-300 mt-0.5">
+                    {isSw ? 'Stoo ya Dar, Mwanza, Pemba...' : 'Multi-branch sync'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl backdrop-blur-lg bg-slate-950/45 border border-white/15 flex items-start gap-2.5">
+                <span className="material-symbols-outlined text-emerald-400 text-lg mt-0.5">receipt_long</span>
+                <div>
+                  <h4 className="text-xs font-bold text-white leading-tight">Mikataba & Mauzo</h4>
+                  <p className="text-[10px] text-slate-300 mt-0.5">
+                    {isSw ? 'Taslimu, mikopo & risiti' : 'Cash & lease contracts'}
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-xl backdrop-blur-lg bg-slate-950/45 border border-white/15 flex items-start gap-2.5">
+                <span className="material-symbols-outlined text-emerald-400 text-lg mt-0.5">verified</span>
+                <div>
+                  <h4 className="text-xs font-bold text-white leading-tight">Ukaguzi wa PDI</h4>
+                  <p className="text-[10px] text-slate-300 mt-0.5">
+                    {isSw ? 'Pre-Delivery & Waranti' : 'PDI warranty audits'}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* ========================================================================= */}
+          {/* RIGHT COLUMN: GLASSMORPHISM AUTHENTICATION FORM (Desktop & Mobile)        */}
+          {/* ========================================================================= */}
+          <div className="order-1 lg:order-2 w-full lg:col-span-5 xl:col-span-5">
+            <div className="relative rounded-3xl p-6 sm:p-8 backdrop-blur-2xl bg-slate-950/60 dark:bg-slate-950/70 border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.85)] ring-1 ring-white/10 overflow-hidden">
+              
+              {/* Inner glass reflection highlights */}
+              <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
+
               {/* Top Bar: Security Badge & Language Switcher */}
-              <div className="flex items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-800/80">
+              <div className="relative z-10 flex items-center justify-between gap-3 mb-6 pb-4 border-b border-white/15">
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px] font-bold border border-emerald-500/20">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full backdrop-blur-md bg-emerald-500/15 text-emerald-300 text-[11px] font-bold border border-emerald-400/30 shadow-xs">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     <span>{isSw ? 'Portal ya Mfumo' : 'Enterprise Portal'}</span>
                   </span>
                 </div>
 
-                {/* Language Switcher */}
-                <div className="flex items-center bg-slate-800/90 p-0.5 rounded-xl border border-slate-700/80 shadow-2xs">
+                {/* Glassmorphism Language Switcher */}
+                <div className="flex items-center bg-white/10 backdrop-blur-md p-0.5 rounded-xl border border-white/15 shadow-inner">
                   <button
                     type="button"
                     onClick={() => language !== 'en' && onToggleLanguage()}
                     className={`px-3 py-1 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
                       language === 'en'
                         ? 'bg-[#006948] text-white shadow-xs'
-                        : 'text-slate-400 hover:text-white'
+                        : 'text-slate-300 hover:text-white'
                     }`}
                   >
                     <BritishFlag className="w-4 h-2.5" />
@@ -330,7 +495,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                     className={`px-3 py-1 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
                       language === 'sw'
                         ? 'bg-[#006948] text-white shadow-xs'
-                        : 'text-slate-400 hover:text-white'
+                        : 'text-slate-300 hover:text-white'
                     }`}
                   >
                     <TanzaniaFlag className="w-4 h-2.5" />
@@ -340,16 +505,16 @@ export const LoginView: React.FC<LoginViewProps> = ({
               </div>
 
               {/* Brand Header */}
-              <div className="text-center sm:text-left mb-6">
+              <div className="relative z-10 text-center sm:text-left mb-6">
                 {/* Mobile Quick 2W & 3W Pill */}
-                <div className="lg:hidden inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider mb-3">
+                <div className="lg:hidden inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg backdrop-blur-md bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 font-mono text-[10px] font-bold uppercase tracking-wider mb-3">
                   <span>🛵 2W Pikipiki</span>
-                  <span className="text-slate-600">•</span>
+                  <span className="text-slate-400">•</span>
                   <span>🛺 3W Bajaji ERP</span>
                 </div>
 
                 <div className="flex items-center gap-3.5 mb-3 text-left">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white dark:bg-slate-800 p-1.5 shadow-xl shadow-emerald-950/60 shrink-0 border border-emerald-400/30">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/95 p-1.5 shadow-xl shadow-black/50 shrink-0 border border-white/30 backdrop-blur-md">
                     <img
                       src="/DMS-logo.png"
                       alt="DMS Logo"
@@ -357,16 +522,16 @@ export const LoginView: React.FC<LoginViewProps> = ({
                     />
                   </div>
                   <div>
-                    <h1 className="text-lg sm:text-2xl font-black tracking-tight text-white leading-tight font-sans">
+                    <h1 className="text-lg sm:text-2xl font-bold tracking-tight text-white leading-tight font-sans">
                       Dealer <span className="text-emerald-400">Management</span> System
                     </h1>
-                    <p className="text-[10px] sm:text-[11px] text-emerald-400 font-bold tracking-wider uppercase mt-0.5 font-mono">
+                    <p className="text-[10px] sm:text-[11px] text-emerald-300 font-bold tracking-wider uppercase mt-0.5 font-mono">
                       2W & 3W ERP • Multi-Dealer Platform
                     </p>
                   </div>
                 </div>
 
-                <p className="text-xs text-slate-400 leading-relaxed text-left">
+                <p className="text-xs text-slate-300 leading-relaxed text-left font-normal">
                   {isSw
                     ? 'Portal kuu ya kudhibiti Madealer wa Pikipiki na Bajaji, stoo ya namba za Chassis, na mauzo nchini kote.'
                     : 'Central Portal for Managing Motorcycle & Tricycle Dealerships, VIN/Chassis Inventory, and Sales.'}
@@ -375,19 +540,19 @@ export const LoginView: React.FC<LoginViewProps> = ({
 
               {/* Error Message */}
               {errorMessage && (
-                <div className="mb-4 p-3.5 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-300 text-xs flex items-start gap-2.5 animate-in fade-in">
+                <div className="relative z-10 mb-4 p-3.5 rounded-2xl backdrop-blur-md bg-red-500/15 border border-red-500/30 text-red-200 text-xs flex items-start gap-2.5 animate-in fade-in">
                   <span className="material-symbols-outlined text-lg text-red-400 shrink-0 mt-0.5">error</span>
                   <span className="leading-relaxed font-medium">{errorMessage}</span>
                 </div>
               )}
 
-              {/* SINGLE UNIFIED LOGIN FORM */}
-              <form onSubmit={handleSubmit} className="space-y-4">
+              {/* SINGLE UNIFIED LOGIN FORM WITH FROSTED GLASS INPUTS */}
+              <form onSubmit={handleSubmit} className="relative z-10 space-y-4">
                 {/* 1. Universal Identifier Input */}
                 <div>
                   <label
                     htmlFor="login-identifier"
-                    className="block text-xs font-bold text-slate-200 mb-1.5 cursor-pointer"
+                    className="block text-xs font-semibold text-slate-200 mb-1.5 cursor-pointer"
                   >
                     {isSw ? 'Email / Simu / Dealer Code' : 'Email / Phone / Dealer Code'}
                   </label>
@@ -408,10 +573,10 @@ export const LoginView: React.FC<LoginViewProps> = ({
                           ? 'Email, 0713759553, au C-DAR-N00988'
                           : 'Email, Phone, or Dealer Code'
                       }
-                      className="w-full pl-11 pr-4 py-3 text-xs sm:text-sm bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all font-medium"
+                      className="w-full pl-11 pr-4 py-3 text-xs sm:text-sm backdrop-blur-md bg-slate-950/50 border border-white/15 rounded-xl text-white placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 focus:bg-slate-900/70 transition-all font-medium shadow-inner"
                     />
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-1.5 flex items-center gap-1.5">
+                  <p className="text-[11px] text-slate-300 mt-1.5 flex items-center gap-1.5 font-normal">
                     <span className="material-symbols-outlined text-[14px] text-emerald-400 shrink-0">verified_user</span>
                     <span>
                       {isSw
@@ -426,7 +591,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                   <div className="flex items-center justify-between mb-1.5">
                     <label
                       htmlFor="login-password"
-                      className="block text-xs font-bold text-slate-200 cursor-pointer"
+                      className="block text-xs font-semibold text-slate-200 cursor-pointer"
                     >
                       {isSw ? 'Nenosiri (Password)' : 'Password'}
                     </label>
@@ -444,13 +609,13 @@ export const LoginView: React.FC<LoginViewProps> = ({
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-11 pr-11 py-3 text-xs sm:text-sm bg-slate-800/90 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-hidden focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all font-medium"
+                      className="w-full pl-11 pr-11 py-3 text-xs sm:text-sm backdrop-blur-md bg-slate-950/50 border border-white/15 rounded-xl text-white placeholder-slate-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 focus:bg-slate-900/70 transition-all font-medium shadow-inner"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
                       aria-label={showPassword ? 'Hide password' : 'Show password'}
-                      className="absolute right-3.5 top-2.5 text-slate-400 hover:text-white p-1 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-emerald-500 cursor-pointer transition-colors"
+                      className="absolute right-3.5 top-2.5 text-slate-400 hover:text-white p-1 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-emerald-400 cursor-pointer transition-colors"
                     >
                       <span className="material-symbols-outlined text-lg">
                         {showPassword ? 'visibility_off' : 'visibility'}
@@ -459,11 +624,11 @@ export const LoginView: React.FC<LoginViewProps> = ({
                   </div>
                 </div>
 
-                {/* Submit Button */}
+                {/* Submit Button with Luminous Glass Sheen */}
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3.5 px-4 bg-gradient-to-r from-[#006948] via-[#007a53] to-[#008f62] hover:from-[#005a3e] hover:to-[#00704e] text-white rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/70 transition-all active:scale-[0.99] cursor-pointer disabled:opacity-70 mt-4 border border-emerald-500/30"
+                  className="w-full py-3.5 px-4 bg-gradient-to-r from-emerald-600 via-[#006948] to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl shadow-emerald-950/80 transition-all active:scale-[0.99] cursor-pointer disabled:opacity-70 mt-4 border border-emerald-400/40 hover:border-emerald-300"
                 >
                   {isLoading ? (
                     <>
@@ -479,180 +644,31 @@ export const LoginView: React.FC<LoginViewProps> = ({
                 </button>
               </form>
 
-              {/* Footer inside login card */}
-              <div className="mt-6 pt-4 border-t border-slate-800/70 flex items-center justify-between text-xs text-slate-400 font-medium">
+              {/* Footer inside login glass card */}
+              <div className="relative z-10 mt-6 pt-4 border-t border-white/15 flex items-center justify-between text-xs text-slate-300 font-medium">
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
                   <span>{isSw ? 'Ulinzi wa SSL / TLS' : 'SSL Encrypted'}</span>
                 </span>
-                <span className="font-mono text-[11px] text-slate-400 font-semibold">v2.6 Enterprise</span>
+                <span className="font-mono text-[11px] text-slate-300 font-semibold">v2.6 Enterprise</span>
               </div>
             </div>
-          </div>
-
-          {/* ========================================================================= */}
-          {/* RIGHT COLUMN: PIKIPIKI & BAJAJI ENTERPRISE SHOWCASE (Desktop / PC Only)   */}
-          {/* ========================================================================= */}
-          <div className="hidden lg:flex lg:col-span-7 xl:col-span-7 flex-col justify-center space-y-6 pl-0 xl:pl-4">
-            
-            {/* Top Showcase Banner */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-extrabold uppercase tracking-wider mb-3">
-                <span className="material-symbols-outlined text-sm text-emerald-400">two_wheeler</span>
-                <span>TVS & BAJAJ COMMERCIAL DEALERSHIPS • TANZANIA</span>
-              </div>
-              <h2 className="text-3xl xl:text-4xl font-black text-white tracking-tight leading-tight">
-                {isSw ? (
-                  <>
-                    Usimamizi Kamili wa <span className="text-emerald-400">Pikipiki</span> na <span className="text-teal-300">Bajaji</span> Nchini Kote
-                  </>
-                ) : (
-                  <>
-                    Complete ERP for <span className="text-emerald-400">Motorcycle</span> & <span className="text-teal-300">Tricycle</span> Dealerships
-                  </>
-                )}
-              </h2>
-              <p className="text-sm text-slate-300 mt-2 max-w-xl leading-relaxed">
-                {isSw
-                  ? 'Jukwaa maalum la kudhibiti uagizaji wa mzigo, namba za Chassis (VIN) na Engine, stoo za matawi, mauzo ya mikopo na taslimu, pamoja na vibali vya TRA.'
-                  : 'Tailored enterprise ERP tracking commercial 2-Wheelers and 3-Wheelers: 17-digit Chassis verification, branch inventory, cash & lease sales, and tax receipts.'}
-              </p>
-            </div>
-
-            {/* TWO SHOWCASE CARDS: PIKIPIKI (2W) & BAJAJI (3W) */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-              
-              {/* CARD 1: PIKIPIKI (2-WHEELERS) */}
-              <div className="group relative rounded-2xl p-5 bg-gradient-to-br from-slate-900/90 via-slate-900/80 to-emerald-950/40 border border-emerald-500/20 hover:border-emerald-500/50 shadow-xl transition-all duration-200">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-extrabold uppercase tracking-wider border border-emerald-500/30">
-                    2W • Pikipiki
-                  </span>
-                  <span className="text-[11px] font-bold text-slate-400 font-mono">110cc – 160cc</span>
-                </div>
-                
-                <h3 className="text-base font-black text-white tracking-tight mb-1">
-                  Boxer & TVS HLX Series
-                </h3>
-                <p className="text-xs text-slate-400 mb-3">
-                  {isSw ? 'BM150, HLX 125, Apache RTR, Star City+' : 'BM150, HLX 125, Apache RTR, Star City+'}
-                </p>
-
-                {/* Vector Motorcycle Illustration */}
-                <div className="h-28 w-full flex items-center justify-center py-1 bg-slate-950/60 rounded-xl border border-slate-800/80 mb-3 overflow-hidden">
-                  <MotorcycleVector className="w-full h-full max-h-24 transition-transform group-hover:scale-105 duration-300" />
-                </div>
-
-                {/* Spec Pills */}
-                <div className="flex flex-wrap gap-1.5">
-                  <span className="px-2 py-0.5 rounded-md bg-slate-800/90 text-slate-300 text-[10px] font-semibold border border-slate-700">
-                    Boda Boda Fleet
-                  </span>
-                  <span className="px-2 py-0.5 rounded-md bg-slate-800/90 text-slate-300 text-[10px] font-semibold border border-slate-700">
-                    Chassis & Engine VIN
-                  </span>
-                  <span className="px-2 py-0.5 rounded-md bg-emerald-900/40 text-emerald-300 text-[10px] font-semibold border border-emerald-700/50">
-                    Live Stock
-                  </span>
-                </div>
-              </div>
-
-              {/* CARD 2: BAJAJI (3-WHEELERS) */}
-              <div className="group relative rounded-2xl p-5 bg-gradient-to-br from-slate-900/90 via-slate-900/80 to-teal-950/40 border border-teal-500/20 hover:border-teal-500/50 shadow-xl transition-all duration-200">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="px-2.5 py-0.5 rounded-md bg-teal-500/20 text-teal-300 font-mono text-[11px] font-extrabold uppercase tracking-wider border border-teal-500/30">
-                    3W • Bajaji
-                  </span>
-                  <span className="text-[11px] font-bold text-slate-400 font-mono">200cc 4S EFI</span>
-                </div>
-                
-                <h3 className="text-base font-black text-white tracking-tight mb-1">
-                  TVS King & Bajaj RE 4S
-                </h3>
-                <p className="text-xs text-slate-400 mb-3">
-                  {isSw ? 'King Deluxe, Bajaj RE 4S, King Kargo 200' : 'King Deluxe, Bajaj RE 4S, King Kargo 200'}
-                </p>
-
-                {/* Vector Bajaji Illustration */}
-                <div className="h-28 w-full flex items-center justify-center py-1 bg-slate-950/60 rounded-xl border border-slate-800/80 mb-3 overflow-hidden">
-                  <BajajiVector className="w-full h-full max-h-24 transition-transform group-hover:scale-105 duration-300" />
-                </div>
-
-                {/* Spec Pills */}
-                <div className="flex flex-wrap gap-1.5">
-                  <span className="px-2 py-0.5 rounded-md bg-slate-800/90 text-slate-300 text-[10px] font-semibold border border-slate-700">
-                    Passenger & Cargo
-                  </span>
-                  <span className="px-2 py-0.5 rounded-md bg-slate-800/90 text-slate-300 text-[10px] font-semibold border border-slate-700">
-                    PDI Inspection
-                  </span>
-                  <span className="px-2 py-0.5 rounded-md bg-teal-900/40 text-teal-300 text-[10px] font-semibold border border-teal-700/50">
-                    TRA Ready
-                  </span>
-                </div>
-              </div>
-
-            </div>
-
-            {/* 4 ENTERPRISE CAPABILITY HIGHLIGHTS */}
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 pt-2">
-              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800/80 flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-emerald-400 text-lg mt-0.5">pin</span>
-                <div>
-                  <h4 className="text-xs font-bold text-white leading-tight">Chassis & VIN</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5">
-                    {isSw ? 'Uthibitisho wa tarakimu 17' : '17-digit serial lock'}
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800/80 flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-emerald-400 text-lg mt-0.5">storefront</span>
-                <div>
-                  <h4 className="text-xs font-bold text-white leading-tight">Matawi Nchini</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5">
-                    {isSw ? 'Stoo ya Dar, Mwanza, Arusha...' : 'Multi-branch sync'}
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800/80 flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-emerald-400 text-lg mt-0.5">receipt_long</span>
-                <div>
-                  <h4 className="text-xs font-bold text-white leading-tight">Mikataba & Mauzo</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5">
-                    {isSw ? 'Taslimu, mikopo & risiti' : 'Cash & lease contracts'}
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-900/70 border border-slate-800/80 flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-emerald-400 text-lg mt-0.5">verified</span>
-                <div>
-                  <h4 className="text-xs font-bold text-white leading-tight">Ukaguzi wa PDI</h4>
-                  <p className="text-[10px] text-slate-400 mt-0.5">
-                    {isSw ? 'Pre-Delivery & Waranti' : 'PDI warranty audits'}
-                  </p>
-                </div>
-              </div>
-            </div>
-
           </div>
 
         </div>
       </div>
 
-      {/* Global Bottom Bar */}
-      <footer className="relative z-10 w-full border-t border-slate-800/80 bg-slate-950/80 backdrop-blur-md py-3 px-4 sm:px-8 text-center text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
+      {/* Global Bottom Bar with Frosted Glass Backdrop */}
+      <footer className="relative z-10 w-full border-t border-white/15 bg-slate-950/75 backdrop-blur-md py-3 px-4 sm:px-8 text-center text-xs text-slate-300 flex flex-col sm:flex-row items-center justify-between gap-2">
         <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-          <span className="font-semibold text-slate-300">© 2026 Dealer Management System (DMS)</span>
-          <span className="text-slate-600 hidden sm:inline">•</span>
+          <span className="font-semibold text-white">© 2026 Dealer Management System (DMS)</span>
+          <span className="text-slate-500 hidden sm:inline">•</span>
           <span>Automotive ERP Platform</span>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 text-[11px] text-slate-400 font-mono">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-4 text-[11px] text-slate-300 font-mono">
           <span>TVS & Bajaj Certified Dealers</span>
-          <span className="text-slate-600 hidden sm:inline">•</span>
-          <span className="text-emerald-400">Tanzania Operations</span>
+          <span className="text-slate-500 hidden sm:inline">•</span>
+          <span className="text-emerald-400 font-bold">Tanzania Operations</span>
         </div>
       </footer>
     </div>
