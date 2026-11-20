@@ -17,6 +17,7 @@ import {
   ColumnDef,
   StatusBadge,
   QuickChassisChip,
+  SelectBox,
 } from '../components/common';
 
 type TimeRange = 'today' | 'this_week' | 'this_month' | 'all_time';
@@ -453,44 +454,44 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
           <div className="flex items-center gap-2.5 flex-wrap">
             {/* Dealer Selector */}
-            <div className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-800/90 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs transition-colors">
-              <span className="material-symbols-outlined text-sm text-slate-500 dark:text-slate-400">hub</span>
-              <select
-                value={selectedDealerCode}
-                onChange={(e) => handleDealerChange(e.target.value)}
-                className="bg-transparent text-xs font-bold text-slate-800 dark:text-white outline-none cursor-pointer max-w-[200px] truncate"
-              >
-                <option value="ALL" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-                  {language === 'sw' ? 'Ma-Dealer Wote (Mtandao Mzima)' : 'All Dealers (Global Network)'}
+            <SelectBox
+              icon="hub"
+              value={selectedDealerCode}
+              onChange={(e) => handleDealerChange(e.target.value)}
+              className="max-w-[220px]"
+              wrapperClassName="w-auto"
+              size="sm"
+            >
+              <option value="ALL">
+                {language === 'sw' ? 'Ma-Dealer Wote (Mtandao Mzima)' : 'All Dealers (Global Network)'}
+              </option>
+              {dealers.map((d) => (
+                <option key={d.id} value={d.code}>
+                  {d.name} ({d.code})
                 </option>
-                {dealers.map((d) => (
-                  <option key={d.id} value={d.code} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-                    {d.name} ({d.code})
-                  </option>
-                ))}
-              </select>
-            </div>
+              ))}
+            </SelectBox>
 
             {/* Branch Selector (Cascades dynamically based on Dealer) */}
-            <div className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-800/90 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs transition-colors">
-              <span className="material-symbols-outlined text-sm text-emerald-600 dark:text-emerald-400">storefront</span>
-              <select
-                value={selectedBranchId}
-                onChange={(e) => setSelectedBranchId(e.target.value)}
-                className="bg-transparent text-xs font-semibold text-slate-800 dark:text-white outline-none cursor-pointer max-w-[200px] truncate"
-              >
-                <option value="ALL" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-                  {selectedDealerCode === 'ALL'
-                    ? (language === 'sw' ? 'Matawi Yote Mtandaoni' : 'All Network Branches')
-                    : (language === 'sw' ? 'Matawi Yote ya Dealer Huyu' : 'All Branches of this Dealer')}
+            <SelectBox
+              icon="storefront"
+              value={selectedBranchId}
+              onChange={(e) => setSelectedBranchId(e.target.value)}
+              className="max-w-[220px]"
+              wrapperClassName="w-auto"
+              size="sm"
+            >
+              <option value="ALL">
+                {selectedDealerCode === 'ALL'
+                  ? (language === 'sw' ? 'Matawi Yote Mtandaoni' : 'All Network Branches')
+                  : (language === 'sw' ? 'Matawi Yote ya Dealer Huyu' : 'All Branches of this Dealer')}
+              </option>
+              {availableBranchesForFilter.map((b) => (
+                <option key={b.id} value={b.id}>
+                  {b.name} ({b.code})
                 </option>
-                {availableBranchesForFilter.map((b) => (
-                  <option key={b.id} value={b.id} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
-                    {b.name} ({b.code})
-                  </option>
-                ))}
-              </select>
-            </div>
+              ))}
+            </SelectBox>
           </div>
         </div>
       )}

@@ -8,4 +8,6 @@ export { StatusBadge } from './StatusBadge';
 export type { StatusBadgeProps } from './StatusBadge';
 export { QuickChassisChip } from './QuickChassisChip';
 export type { QuickChassisChipProps } from './QuickChassisChip';
+export { SelectBox } from './SelectBox';
+export type { SelectBoxProps, SelectOption } from './SelectBox';
 export { ErrorBoundary } from './ErrorBoundary';

@@ -6,6 +6,7 @@ import {
   DataTable,
   ColumnDef,
   QuickChassisChip,
+  SelectBox,
 } from '../components/common';
 
 interface TransfersViewProps {
@@ -154,61 +155,57 @@ export const TransfersView: React.FC<TransfersViewProps> = ({
   ];
 
   const transferFilters = (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-      <div>
-        <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-          {language === 'sw' ? 'Kutoka Tawi' : 'From Branch'}
-        </label>
-        <select
-          value={selectedFromBranch}
-          onChange={(e) => setSelectedFromBranch(e.target.value)}
-          className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
-        >
-          <option value="ALL">{language === 'sw' ? 'Matawi Yote ya Kutoka' : 'All Origin Branches'}</option>
-          {branches.map((b) => (
-            <option key={b.id} value={b.id}>
-              {b.name}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+      <SelectBox
+        label={language === 'sw' ? 'Kutoka Tawi' : 'From Branch'}
+        icon="output"
+        size="sm"
+        value={selectedFromBranch}
+        onChange={(e) => setSelectedFromBranch(e.target.value)}
+      >
+        <option value="ALL">{language === 'sw' ? 'Matawi Yote ya Kutoka' : 'All Origin Branches'}</option>
+        {branches.map((b) => (
+          <option key={b.id} value={b.id}>
+            {b.name}
+          </option>
+        ))}
+      </SelectBox>
+
+      <SelectBox
+        label={language === 'sw' ? 'Kwenda Tawi' : 'To Branch'}
+        icon="input"
+        size="sm"
+        value={selectedToBranch}
+        onChange={(e) => setSelectedToBranch(e.target.value)}
+      >
+        <option value="ALL">{language === 'sw' ? 'Matawi Yote ya Kupokea' : 'All Destination Branches'}</option>
+        {branches.map((b) => (
+          <option key={b.id} value={b.id}>
+            {b.name}
+          </option>
+        ))}
+      </SelectBox>
 
       <div>
-        <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-          {language === 'sw' ? 'Kwenda Tawi' : 'To Branch'}
-        </label>
-        <select
-          value={selectedToBranch}
-          onChange={(e) => setSelectedToBranch(e.target.value)}
-          className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
-        >
-          <option value="ALL">{language === 'sw' ? 'Matawi Yote ya Kupokea' : 'All Destination Branches'}</option>
-          {branches.map((b) => (
-            <option key={b.id} value={b.id}>
-              {b.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div>
-        <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
+        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
           {language === 'sw' ? 'Aina ya Chombo' : 'Category'}
         </label>
         <div className="flex items-center gap-2">
-          <select
+          <SelectBox
+            icon="two_wheeler"
+            size="sm"
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value as 'ALL' | VehicleType)}
-            className="flex-1 px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
+            className="flex-1"
           >
             <option value="ALL">{t.allCategories}</option>
             <option value="2W">{language === 'sw' ? 'Pikipiki (2W)' : '2-Wheelers (2W)'}</option>
             <option value="3W">{language === 'sw' ? 'Bajaji (3W)' : '3-Wheelers (3W)'}</option>
-          </select>
+          </SelectBox>
           <button
             type="button"
             onClick={handleResetFilters}
-            className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors"
+            className="h-[34px] px-2.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors flex items-center justify-center cursor-pointer shadow-2xs shrink-0"
             title={language === 'sw' ? 'Safisha vichujio' : 'Reset filters'}
           >
             <span className="material-symbols-outlined text-sm">restart_alt</span>

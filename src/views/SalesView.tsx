@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { SaleRecord, Branch, AuthUser, VehicleModel, VehicleType, Dealer } from '../types';
 import { Language, translations } from '../i18n/translations';
-import { PageHeaderBanner, DataTable, ColumnDef, ActionMenu, StatusBadge, QuickChassisChip } from '../components/common';
+import { PageHeaderBanner, DataTable, ColumnDef, ActionMenu, StatusBadge, QuickChassisChip, SelectBox } from '../components/common';
 
 interface SalesViewProps {
   sales: SaleRecord[];
@@ -536,106 +536,88 @@ export const SalesView: React.FC<SalesViewProps> = ({
     <div className="space-y-3">
       <div className={`grid grid-cols-1 sm:grid-cols-2 ${isSuperAdmin ? 'lg:grid-cols-5' : 'lg:grid-cols-4'} gap-3`}>
         {isSuperAdmin && (
-          <div>
-            <label className="text-[10px] font-bold text-rose-500 uppercase tracking-wider block mb-1">
-              {language === 'sw' ? 'Dealer (Mtandao)' : 'Dealer Network'}
-            </label>
-            <select
-              value={selectedDealerCode}
-              onChange={(e) => handleDealerChange(e.target.value)}
-              className="w-full px-3 py-1.5 text-xs rounded-xl border border-rose-300 dark:border-rose-900 bg-rose-50/40 dark:bg-slate-800 text-slate-900 dark:text-white font-bold outline-none"
-            >
-              <option value="ALL">{language === 'sw' ? '🌐 Ma-Dealer Wote' : '🌐 All Dealers'}</option>
-              {dealers.map((d) => (
-                <option key={d.id} value={d.code}>{d.name} ({d.code})</option>
-              ))}
-            </select>
-          </div>
+          <SelectBox
+            label={language === 'sw' ? 'Dealer (Mtandao)' : 'Dealer Network'}
+            icon="hub"
+            size="sm"
+            value={selectedDealerCode}
+            onChange={(e) => handleDealerChange(e.target.value)}
+          >
+            <option value="ALL">{language === 'sw' ? '🌐 Ma-Dealer Wote' : '🌐 All Dealers'}</option>
+            {dealers.map((d) => (
+              <option key={d.id} value={d.code}>{d.name} ({d.code})</option>
+            ))}
+          </SelectBox>
         )}
 
-        <div>
-          <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-            {language === 'sw' ? 'Tawi' : 'Branch'}
-          </label>
-          <select
-            disabled={isBranchStaff}
-            value={selectedBranchId}
-            onChange={(e) => setSelectedBranchId(e.target.value)}
-            className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none"
-          >
-            <option value="ALL">
-              {selectedDealerCode === 'ALL'
-                ? t.allBranches
-                : (language === 'sw' ? 'Matawi Yote ya Dealer Huyu' : 'All Branches of this Dealer')}
-            </option>
-            {availableBranches.map((b) => (
-              <option key={b.id} value={b.id}>{b.name} ({b.code})</option>
-            ))}
-          </select>
-        </div>
+        <SelectBox
+          label={language === 'sw' ? 'Tawi' : 'Branch'}
+          icon="storefront"
+          size="sm"
+          disabled={isBranchStaff}
+          value={selectedBranchId}
+          onChange={(e) => setSelectedBranchId(e.target.value)}
+        >
+          <option value="ALL">
+            {selectedDealerCode === 'ALL'
+              ? t.allBranches
+              : (language === 'sw' ? 'Matawi Yote ya Dealer Huyu' : 'All Branches of this Dealer')}
+          </option>
+          {availableBranches.map((b) => (
+            <option key={b.id} value={b.id}>{b.name} ({b.code})</option>
+          ))}
+        </SelectBox>
 
-        <div>
-          <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-            {language === 'sw' ? 'Aina ya Pikipiki' : 'Category'}
-          </label>
-          <select
-            value={selectedType}
-            onChange={(e) => handleTypeChange(e.target.value as 'ALL' | VehicleType)}
-            className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none"
-          >
-            <option value="ALL">{t.allCategories}</option>
-            <option value="2W">{language === 'sw' ? 'Magurudumu 2 (2W)' : '2-Wheelers (2W)'}</option>
-            <option value="3W">{language === 'sw' ? 'Magurudumu 3 / Bajaji (3W)' : '3-Wheelers (3W)'}</option>
-          </select>
-        </div>
+        <SelectBox
+          label={language === 'sw' ? 'Aina ya Pikipiki' : 'Category'}
+          icon="two_wheeler"
+          size="sm"
+          value={selectedType}
+          onChange={(e) => handleTypeChange(e.target.value as 'ALL' | VehicleType)}
+        >
+          <option value="ALL">{t.allCategories}</option>
+          <option value="2W">{language === 'sw' ? 'Magurudumu 2 (2W)' : '2-Wheelers (2W)'}</option>
+          <option value="3W">{language === 'sw' ? 'Magurudumu 3 / Bajaji (3W)' : '3-Wheelers (3W)'}</option>
+        </SelectBox>
 
-        <div>
-          <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-            {language === 'sw' ? 'Muundo / Model' : 'Model'}
-          </label>
-          <select
-            value={selectedModel}
-            onChange={(e) => setSelectedModel(e.target.value)}
-            className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none"
-          >
-            <option value="ALL">{t.allModels}</option>
-            {availableModels.map((m) => (
-              <option key={m.id} value={m.name}>{m.name}</option>
-            ))}
-          </select>
-        </div>
+        <SelectBox
+          label={language === 'sw' ? 'Muundo / Model' : 'Model'}
+          icon="motorcycle"
+          size="sm"
+          value={selectedModel}
+          onChange={(e) => setSelectedModel(e.target.value)}
+        >
+          <option value="ALL">{t.allModels}</option>
+          {availableModels.map((m) => (
+            <option key={m.id} value={m.name}>{m.name}</option>
+          ))}
+        </SelectBox>
 
-        <div>
-          <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-            {t.paymentMethod}
-          </label>
-          <select
-            value={selectedMethod}
-            onChange={(e) => setSelectedMethod(e.target.value)}
-            className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none"
-          >
-            <option value="ALL">{language === 'sw' ? 'Njia Zote za Malipo' : 'All Payment Methods'}</option>
-            <option value="CASH">{t.paymentCash}</option>
-            <option value="MOBILE_MONEY">{t.paymentMobile}</option>
-            <option value="BANK_TRANSFER">{t.paymentBank}</option>
-            <option value="INSTALLMENT">{t.paymentInstallment}</option>
-          </select>
-        </div>
+        <SelectBox
+          label={t.paymentMethod}
+          icon="payments"
+          size="sm"
+          value={selectedMethod}
+          onChange={(e) => setSelectedMethod(e.target.value)}
+        >
+          <option value="ALL">{language === 'sw' ? 'Njia Zote za Malipo' : 'All Payment Methods'}</option>
+          <option value="CASH">{t.paymentCash}</option>
+          <option value="MOBILE_MONEY">{t.paymentMobile}</option>
+          <option value="BANK_TRANSFER">{t.paymentBank}</option>
+          <option value="INSTALLMENT">{t.paymentInstallment}</option>
+        </SelectBox>
 
-        <div>
-          <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-            {language === 'sw' ? 'Hali ya Malipo' : 'Payment Status'}
-          </label>
-          <select
-            value={selectedPaymentStatus}
-            onChange={(e) => setSelectedPaymentStatus(e.target.value as 'ALL' | 'PAID' | 'PARTIAL')}
-            className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none"
-          >
-            <option value="ALL">{t.allPaymentStatuses}</option>
-            <option value="PAID">{language === 'sw' ? 'Imelipwa Kamili (Paid)' : 'Fully Paid'}</option>
-            <option value="PARTIAL">{language === 'sw' ? 'Malipo ya Sehemu (Partial)' : 'Partially Paid'}</option>
-          </select>
-        </div>
+        <SelectBox
+          label={language === 'sw' ? 'Hali ya Malipo' : 'Payment Status'}
+          icon="paid"
+          size="sm"
+          value={selectedPaymentStatus}
+          onChange={(e) => setSelectedPaymentStatus(e.target.value as 'ALL' | 'PAID' | 'PARTIAL')}
+        >
+          <option value="ALL">{t.allPaymentStatuses}</option>
+          <option value="PAID">{language === 'sw' ? 'Imelipwa Kamili (Paid)' : 'Fully Paid'}</option>
+          <option value="PARTIAL">{language === 'sw' ? 'Malipo ya Sehemu (Partial)' : 'Partially Paid'}</option>
+        </SelectBox>
 
         <div>
           <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">

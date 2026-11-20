@@ -6,6 +6,7 @@ import {
   PageHeaderBanner,
   DataTable,
   ColumnDef,
+  SelectBox,
 } from '../components/common';
 
 interface ExpensesViewProps {
@@ -288,42 +289,36 @@ export const ExpensesView: React.FC<ExpensesViewProps> = ({
 
       {/* Dropdown Filters */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 border-t border-slate-100 dark:border-slate-800">
-        <div>
-          <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-            {isSw ? 'Aina ya Matumizi' : 'Category'}
-          </label>
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
-          >
-            <option value="ALL">{isSw ? 'Aina Zote' : 'All Categories'}</option>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {getExpenseCategoryLabel(cat, language)}
-              </option>
-            ))}
-          </select>
-        </div>
+        <SelectBox
+          label={isSw ? 'Aina ya Matumizi' : 'Category'}
+          icon="category"
+          size="sm"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="ALL">{isSw ? 'Aina Zote' : 'All Categories'}</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {getExpenseCategoryLabel(cat, language)}
+            </option>
+          ))}
+        </SelectBox>
 
         {!isBranchStaff && (
-          <div>
-            <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-              {isSw ? 'Tawi' : 'Branch'}
-            </label>
-            <select
-              value={selectedBranchId}
-              onChange={(e) => setSelectedBranchId(e.target.value)}
-              className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500"
-            >
-              <option value="ALL">{isSw ? 'Matawi Yote' : 'All Branches'}</option>
-              {branches.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <SelectBox
+            label={isSw ? 'Tawi' : 'Branch'}
+            icon="storefront"
+            size="sm"
+            value={selectedBranchId}
+            onChange={(e) => setSelectedBranchId(e.target.value)}
+          >
+            <option value="ALL">{isSw ? 'Matawi Yote' : 'All Branches'}</option>
+            {branches.map((b) => (
+              <option key={b.id} value={b.id}>
+                {b.name}
+              </option>
+            ))}
+          </SelectBox>
         )}
 
         <div>

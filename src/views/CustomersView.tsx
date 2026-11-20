@@ -5,6 +5,7 @@ import {
   PageHeaderBanner,
   DataTable,
   ColumnDef,
+  SelectBox,
 } from '../components/common';
 
 interface CustomersViewProps {
@@ -142,14 +143,16 @@ export const CustomersView: React.FC<CustomersViewProps> = ({
   const customerFilters = (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
       <div>
-        <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
+        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
           {language === 'sw' ? 'Tawi Lililosajili Mteja' : 'Registered Branch'}
         </label>
         <div className="flex items-center gap-2">
-          <select
+          <SelectBox
+            icon="storefront"
+            size="sm"
             value={selectedBranchId}
             onChange={(e) => setSelectedBranchId(e.target.value)}
-            className="flex-1 px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
+            className="flex-1"
           >
             <option value="ALL">{t.allBranches}</option>
             {branches.map((b) => (
@@ -157,11 +160,11 @@ export const CustomersView: React.FC<CustomersViewProps> = ({
                 {b.name}
               </option>
             ))}
-          </select>
+          </SelectBox>
           <button
             type="button"
             onClick={handleResetFilters}
-            className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors"
+            className="h-[34px] px-2.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors flex items-center justify-center cursor-pointer shadow-2xs shrink-0"
             title={language === 'sw' ? 'Safisha vichujio' : 'Reset filters'}
           >
             <span className="material-symbols-outlined text-sm">restart_alt</span>

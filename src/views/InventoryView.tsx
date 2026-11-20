@@ -8,6 +8,7 @@ import {
   ActionMenu,
   StatusBadge,
   QuickChassisChip,
+  SelectBox,
 } from '../components/common';
 
 interface InventoryViewProps {
@@ -330,101 +331,91 @@ export const InventoryView: React.FC<InventoryViewProps> = ({
 
   // Collapsible Filters Panel
   const inventoryFilters = (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 items-end">
       {/* Category Filter */}
-      <div>
-        <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-          {language === 'sw' ? 'Aina ya Chombo' : 'Category'}
-        </label>
-        <select
-          value={selectedType}
-          onChange={(e) => handleTypeChange(e.target.value as 'ALL' | '2W' | '3W')}
-          className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
-        >
-          <option value="ALL">{t.allTypes}</option>
-          <option value="2W">{t.type2W}</option>
-          <option value="3W">{t.type3W}</option>
-        </select>
-      </div>
+      <SelectBox
+        label={language === 'sw' ? 'Aina ya Chombo' : 'Category'}
+        icon="two_wheeler"
+        size="sm"
+        value={selectedType}
+        onChange={(e) => handleTypeChange(e.target.value as 'ALL' | '2W' | '3W')}
+      >
+        <option value="ALL">{t.allTypes}</option>
+        <option value="2W">{t.type2W}</option>
+        <option value="3W">{t.type3W}</option>
+      </SelectBox>
 
       {/* Model Filter */}
-      <div>
-        <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-          {language === 'sw' ? 'Mtindo wa Gari' : 'Vehicle Model'}
-        </label>
-        <select
-          value={selectedModel}
-          onChange={(e) => setSelectedModel(e.target.value)}
-          className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
-        >
-          <option value="ALL">{t.allModels}</option>
-          {availableModels.map((m) => (
-            <option key={m.id} value={m.name}>
-              {m.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      <SelectBox
+        label={language === 'sw' ? 'Mtindo wa Gari' : 'Vehicle Model'}
+        icon="motorcycle"
+        size="sm"
+        value={selectedModel}
+        onChange={(e) => setSelectedModel(e.target.value)}
+      >
+        <option value="ALL">{t.allModels}</option>
+        {availableModels.map((m) => (
+          <option key={m.id} value={m.name}>
+            {m.name}
+          </option>
+        ))}
+      </SelectBox>
 
       {/* Branch Filter */}
-      <div>
-        <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-          {language === 'sw' ? 'Tawi' : 'Branch'}
-        </label>
-        <select
-          disabled={isBranchStaff}
-          value={selectedBranchId}
-          onChange={(e) => setSelectedBranchId(e.target.value)}
-          className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 disabled:opacity-60"
-        >
-          <option value="ALL">{t.allBranches}</option>
-          {branches.map((b) => (
-            <option key={b.id} value={b.id}>
-              {b.name} ({b.zone})
-            </option>
-          ))}
-        </select>
-      </div>
+      <SelectBox
+        label={language === 'sw' ? 'Tawi' : 'Branch'}
+        icon="storefront"
+        size="sm"
+        disabled={isBranchStaff}
+        value={selectedBranchId}
+        onChange={(e) => setSelectedBranchId(e.target.value)}
+      >
+        <option value="ALL">{t.allBranches}</option>
+        {branches.map((b) => (
+          <option key={b.id} value={b.id}>
+            {b.name} ({b.zone})
+          </option>
+        ))}
+      </SelectBox>
 
       {/* Status Filter */}
-      <div>
-        <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
-          {language === 'sw' ? 'Hali ya Stoo' : 'Stock Status'}
-        </label>
-        <select
-          value={selectedStatus}
-          onChange={(e) => setSelectedStatus(e.target.value)}
-          className="w-full px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
-        >
-          <option value="ALL">{language === 'sw' ? 'Hali Zote' : 'All Statuses'}</option>
-          <option value="IN STOCK">{t.inStock}</option>
-          <option value="RESERVED">{t.reserved}</option>
-          <option value="TRANSFERRED">{t.transferred}</option>
-          <option value="SOLD">{t.sold}</option>
-          <option value="DAMAGED">{t.damaged}</option>
-        </select>
-      </div>
+      <SelectBox
+        label={language === 'sw' ? 'Hali ya Stoo' : 'Stock Status'}
+        icon="check_circle"
+        size="sm"
+        value={selectedStatus}
+        onChange={(e) => setSelectedStatus(e.target.value)}
+      >
+        <option value="ALL">{language === 'sw' ? 'Hali Zote' : 'All Statuses'}</option>
+        <option value="IN STOCK">{t.inStock}</option>
+        <option value="RESERVED">{t.reserved}</option>
+        <option value="TRANSFERRED">{t.transferred}</option>
+        <option value="SOLD">{t.sold}</option>
+        <option value="DAMAGED">{t.damaged}</option>
+      </SelectBox>
 
       {/* Stock Age Filter + Reset */}
       <div>
-        <label className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
+        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
           {language === 'sw' ? 'Muda Stoo' : 'Stock Age'}
         </label>
         <div className="flex items-center gap-2">
-          <select
+          <SelectBox
+            icon="schedule"
+            size="sm"
             value={selectedAgeRange}
             onChange={(e) => setSelectedAgeRange(e.target.value)}
-            className="flex-1 px-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-medium outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600"
+            className="flex-1"
           >
             <option value="ALL">{t.allAges}</option>
             <option value="0-30">{t.newStock0to30}</option>
             <option value="31-60">{t.midStock31to60}</option>
             <option value="60+">{t.oldStock60Plus}</option>
-          </select>
+          </SelectBox>
           <button
             type="button"
             onClick={handleResetFilters}
-            className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition-colors"
+            className="h-[34px] px-2.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors flex items-center justify-center cursor-pointer shadow-2xs shrink-0"
             title={language === 'sw' ? 'Safisha vichujio' : 'Reset filters'}
           >
             <span className="material-symbols-outlined text-sm">restart_alt</span>

@@ -64,6 +64,24 @@ export function renderCell<T>(col: ColumnDef<T>, item: T, index: number): React.
   return '';
 }
 
+/** Helper to format table headers into clean Proper Case without forcing ALL CAPS */
+export function toProperCase(text: string): string {
+  if (!text) return '';
+  const trimmed = text.trim();
+  const acronyms = new Set(['#', 'VIN', 'TRA', 'ID', 'PDI', 'TZS', 'CSV', '2W', '3W', 'NIDA', 'TVS', 'BM150', 'HLX']);
+  if (acronyms.has(trimmed.toUpperCase())) return trimmed.toUpperCase();
+
+  // If text is ALL CAPS, convert to Proper Title Case
+  const isAllCaps = text === text.toUpperCase() && /[A-Z]/.test(text) && text.length > 2;
+  if (!isAllCaps) return text;
+
+  return text
+    .toLowerCase()
+    .split(' ')
+    .map((w) => (acronyms.has(w.toUpperCase()) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(' ');
+}
+
 export function DataTable<T>({
   data,
   columns,
@@ -293,23 +311,28 @@ export function DataTable<T>({
 
         {/* Right: Per-Page, Density Toggle & CSV Export */}
         <div className="flex items-center gap-2 flex-wrap justify-end shrink-0">
-          {/* Per Page Selector */}
+          {/* Per Page Selector with styled dropdown chevron */}
           <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
             <span className="text-[11px] font-medium hidden sm:inline">{isSw ? 'Onyesha:' : 'Show:'}</span>
-            <select
-              value={pageSize}
-              onChange={(e) => {
-                setPageSize(Number(e.target.value));
-                setCurrentPage(1);
-              }}
-              className="py-1 px-2 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 outline-none cursor-pointer"
-            >
-              {[5, 10, 25, 50, 100].map((num) => (
-                <option key={num} value={num}>
-                  {num} {isSw ? 'safu' : 'rows'}
-                </option>
-              ))}
-            </select>
+            <div className="relative inline-flex items-center">
+              <select
+                value={pageSize}
+                onChange={(e) => {
+                  setPageSize(Number(e.target.value));
+                  setCurrentPage(1);
+                }}
+                className="appearance-none pl-2.5 pr-6 py-1.5 text-xs font-bold rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all cursor-pointer shadow-2xs"
+              >
+                {[5, 10, 25, 50, 100].map((num) => (
+                  <option key={num} value={num}>
+                    {num} {isSw ? 'safu' : 'rows'}
+                  </option>
+                ))}
+              </select>
+              <span className="material-symbols-outlined text-[15px] absolute right-1.5 text-slate-400 pointer-events-none select-none">
+                unfold_more
+              </span>
+            </div>
           </div>
 
           {/* Density Toggle */}
@@ -392,7 +415,7 @@ export function DataTable<T>({
                       key={colKey}
                       onClick={() => handleSort(colKey, col.sortable)}
                       style={{ width: col.width }}
-                      className={`py-3.5 px-3.5 text-[11px] font-bold uppercase tracking-wider text-white border-r border-white/15 last:border-r-0 whitespace-nowrap ${alignClass} ${
+                      className={`py-3.5 px-4 text-xs sm:text-[13px] font-bold normal-case tracking-normal text-white border-r border-white/20 last:border-r-0 whitespace-nowrap select-none ${alignClass} ${
                         col.sortable
                           ? 'cursor-pointer hover:bg-[#005a3e] transition-colors'
                           : ''
@@ -407,7 +430,7 @@ export function DataTable<T>({
                             : 'justify-start'
                         }`}
                       >
-                        <span className="text-white font-bold">{col.header}</span>
+                        <span className="text-white font-bold tracking-normal">{toProperCase(col.header)}</span>
                         {col.sortable && (
                           <span
                             className={`material-symbols-outlined text-[14px] transition-transform ${
