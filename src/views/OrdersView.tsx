@@ -216,7 +216,7 @@ export const OrdersView: React.FC<OrdersViewProps> = ({
           <button
             type="button"
             onClick={onOpenReceiveStockModal}
-            className="px-4 py-2 bg-white hover:bg-emerald-50 text-[#006948] rounded-xl font-black text-xs flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 cursor-pointer shrink-0"
+            className="px-4 py-2 bg-white hover:bg-emerald-50 text-[#006948] rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 cursor-pointer shrink-0"
           >
             <span className="material-symbols-outlined text-[16px]">inventory_2</span>
             <span>{t.actionReceiveStock}</span>

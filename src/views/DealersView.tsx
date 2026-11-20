@@ -569,7 +569,7 @@ export const DealersView: React.FC<DealersViewProps> = ({
           <button
             type="button"
             onClick={handleOpenAddModal}
-            className="w-full sm:w-auto px-4 py-2.5 bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-black text-xs rounded-xl shadow-md flex items-center justify-center gap-1.5 cursor-pointer transition-all shrink-0 min-h-[40px]"
+            className="w-full sm:w-auto px-4 py-2.5 bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-semibold text-xs rounded-xl shadow-md flex items-center justify-center gap-1.5 cursor-pointer transition-all shrink-0 min-h-[40px]"
           >
             <span className="material-symbols-outlined text-[18px]">add_business</span>
             <span>{isSw ? 'Ongeza Dealer Mpya' : 'Add New Dealer'}</span>

@@ -381,7 +381,7 @@ export const ExpensesView: React.FC<ExpensesViewProps> = ({
           <button
             type="button"
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-2 bg-white hover:bg-rose-50 text-rose-700 rounded-xl font-black text-xs flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 cursor-pointer shrink-0"
+            className="px-4 py-2 bg-white hover:bg-rose-50 text-rose-700 rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 cursor-pointer shrink-0"
           >
             <span className="material-symbols-outlined text-[16px]">add_circle</span>
             <span>{isSw ? 'Sajili Matumizi' : 'Record Expense'}</span>

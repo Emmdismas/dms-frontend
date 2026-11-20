@@ -99,7 +99,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({
           <button
             type="button"
             onClick={() => handleExport('PDF')}
-            className="px-4.5 py-2.5 bg-white hover:bg-emerald-50 text-[#006948] rounded-xl font-black text-xs flex items-center gap-1.5 shadow-md shadow-emerald-950/30 transition-all active:scale-95 cursor-pointer"
+            className="px-4.5 py-2.5 bg-white hover:bg-emerald-50 text-[#006948] rounded-xl font-semibold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-950/30 transition-all active:scale-95 cursor-pointer"
           >
             <span className="material-symbols-outlined text-sm">picture_as_pdf</span>
             <span>{t.actionExportPdf}</span>

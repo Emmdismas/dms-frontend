@@ -523,7 +523,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </span>
             )}
           </div>
-          <h2 className="text-lg sm:text-2xl font-black tracking-tight text-white font-sans">
+          <h2 className="text-lg sm:text-2xl font-semibold sm:font-bold tracking-tight text-white font-sans">
             {isSuperAdmin 
               ? (selectedDealerCode === 'ALL' 
                   ? (language === 'sw' ? 'Mtandao wa Ma-Dealer Wote Nchini' : 'Nationwide Multi-Dealer Network Overview')

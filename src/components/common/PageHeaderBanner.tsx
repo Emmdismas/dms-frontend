@@ -68,9 +68,9 @@ export const PageHeaderBanner: React.FC<PageHeaderBannerProps> = ({
   // Subtitle text color
   const getSubtitleStyles = () => {
     if (isAdminTheme) {
-      return 'text-slate-300 font-medium';
+      return 'text-slate-300 font-normal';
     }
-    return 'text-emerald-100/90 font-medium';
+    return 'text-emerald-100/85 font-normal';
   };
 
   // Status Badge styling on top of the background
@@ -97,13 +97,13 @@ export const PageHeaderBanner: React.FC<PageHeaderBannerProps> = ({
         {/* Text Details */}
         <div className="space-y-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h1 className="text-lg sm:text-xl font-black tracking-tight text-white font-sans truncate drop-shadow-xs">
+            <h1 className="text-lg sm:text-xl font-semibold tracking-tight text-white font-sans truncate">
               {title}
             </h1>
 
             {activeBadge && (
               <span
-                className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md border shadow-2xs ${getBadgeColors()}`}
+                className={`inline-flex items-center gap-1.5 text-[11px] font-medium tracking-normal px-2.5 py-0.5 rounded-full border shadow-2xs ${getBadgeColors()}`}
               >
                 {activeBadge.pulse !== false && (
                   <span className={`w-1.5 h-1.5 rounded-full animate-pulse ${isAdminTheme ? 'bg-amber-400' : 'bg-emerald-300'}`} />

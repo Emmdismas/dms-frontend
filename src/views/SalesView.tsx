@@ -681,7 +681,7 @@ export const SalesView: React.FC<SalesViewProps> = ({
             <button
               type="button"
               onClick={onOpenRecordSaleModal}
-              className="min-h-[42px] px-5 py-2.5 bg-white hover:bg-emerald-50 active:scale-95 text-[#006948] rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer whitespace-nowrap shrink-0"
+              className="min-h-[42px] px-5 py-2.5 bg-white hover:bg-emerald-50 active:scale-95 text-[#006948] rounded-xl font-semibold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer whitespace-nowrap shrink-0"
             >
               <span className="material-symbols-outlined text-[18px]">add_circle</span>
               <span>{t.actionRecordSale}</span>

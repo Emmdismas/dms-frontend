@@ -310,7 +310,7 @@ export function DataTable<T>({
             <button
               type="button"
               onClick={() => setShowFilters(!showFilters)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 border transition-all cursor-pointer shadow-2xs ${
+              className={`px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 border transition-all cursor-pointer shadow-2xs ${
                 showFilters
                   ? 'bg-emerald-50 dark:bg-emerald-950/60 text-[#006948] dark:text-emerald-300 border-emerald-400 dark:border-emerald-700 ring-2 ring-emerald-500/15'
                   : 'bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700'
@@ -322,16 +322,10 @@ export function DataTable<T>({
               <span>{isSw ? 'Filters' : 'Filters'}</span>
             </button>
           ) : title ? (
-            <span className="text-sm font-bold text-slate-800 dark:text-white font-sans">
+            <span className="text-sm font-semibold text-slate-800 dark:text-white font-sans">
               {title}
             </span>
           ) : null}
-
-          {title && filterComponent && (
-            <span className="hidden xl:inline-block text-xs font-bold text-slate-500 dark:text-slate-400 font-sans truncate">
-              {title}
-            </span>
-          )}
         </div>
 
         {/* Right: Export & Reset Filters Actions (Matching Image 2 top right buttons) */}

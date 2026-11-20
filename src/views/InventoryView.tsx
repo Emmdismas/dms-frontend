@@ -421,8 +421,6 @@ export const InventoryView: React.FC<InventoryViewProps> = ({
             : 'Real-time vehicle stock tracking, chassis registry, and branch allocation'
         }
         icon="inventory_2"
-        badgeText={`${inStockCount} ${language === 'sw' ? 'Zinapatikana' : 'Available'}`}
-        badgeVariant="success"
         actions={
           currentUser?.role !== 'dealer' && currentUser?.role !== 'owner' ? (
             <div className="flex flex-wrap items-center gap-2">

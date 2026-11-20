@@ -176,7 +176,7 @@ export const CustomersView: React.FC<CustomersViewProps> = ({
           <button
             type="button"
             onClick={onOpenAddCustomerModal}
-            className="px-4 py-2 bg-white hover:bg-emerald-50 text-[#006948] rounded-xl font-black text-xs flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 cursor-pointer shrink-0"
+            className="px-4 py-2 bg-white hover:bg-emerald-50 text-[#006948] rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-95 cursor-pointer shrink-0"
           >
             <span className="material-symbols-outlined text-[16px]">person_add</span>
             <span>{t.actionAddCustomer}</span>
