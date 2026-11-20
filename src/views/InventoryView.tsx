@@ -394,34 +394,19 @@ export const InventoryView: React.FC<InventoryViewProps> = ({
         <option value="DAMAGED">{t.damaged}</option>
       </SelectBox>
 
-      {/* Stock Age Filter + Reset */}
-      <div>
-        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
-          {language === 'sw' ? 'Muda Stoo' : 'Stock Age'}
-        </label>
-        <div className="flex items-center gap-2">
-          <SelectBox
-            icon="schedule"
-            size="sm"
-            value={selectedAgeRange}
-            onChange={(e) => setSelectedAgeRange(e.target.value)}
-            className="flex-1"
-          >
-            <option value="ALL">{t.allAges}</option>
-            <option value="0-30">{t.newStock0to30}</option>
-            <option value="31-60">{t.midStock31to60}</option>
-            <option value="60+">{t.oldStock60Plus}</option>
-          </SelectBox>
-          <button
-            type="button"
-            onClick={handleResetFilters}
-            className="h-[34px] px-2.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors flex items-center justify-center cursor-pointer shadow-2xs shrink-0"
-            title={language === 'sw' ? 'Safisha vichujio' : 'Reset filters'}
-          >
-            <span className="material-symbols-outlined text-sm">restart_alt</span>
-          </button>
-        </div>
-      </div>
+      {/* Stock Age Filter */}
+      <SelectBox
+        label={language === 'sw' ? 'Muda Stoo' : 'Stock Age'}
+        icon="schedule"
+        size="sm"
+        value={selectedAgeRange}
+        onChange={(e) => setSelectedAgeRange(e.target.value)}
+      >
+        <option value="ALL">{t.allAges}</option>
+        <option value="0-30">{t.newStock0to30}</option>
+        <option value="31-60">{t.midStock31to60}</option>
+        <option value="60+">{t.oldStock60Plus}</option>
+      </SelectBox>
     </div>
   );
 
@@ -584,6 +569,8 @@ export const InventoryView: React.FC<InventoryViewProps> = ({
         title={t.inventoryTitle}
         searchPlaceholder={language === 'sw' ? 'Tafuta kwa Chassis, Injini, Mtindo, au Mteja...' : 'Search by Chassis, Engine, Model, or Customer...'}
         filterComponent={inventoryFilters}
+        onResetFilters={handleResetFilters}
+        exportLabel="Export Excel"
         exportFileName="rekodi-za-stoo"
         onRowClick={(unit) => onOpenUnitDetail(unit)}
       />

@@ -822,6 +822,8 @@ export const SalesView: React.FC<SalesViewProps> = ({
         title={t.salesTitle}
         searchPlaceholder={t.chassisSearchPlaceholder}
         filterComponent={salesFilters}
+        onResetFilters={handleResetFilters}
+        exportLabel="Export Excel"
         exportFileName="rekodi-za-mauzo"
       />
     </div>

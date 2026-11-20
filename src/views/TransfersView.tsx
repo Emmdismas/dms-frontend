@@ -186,32 +186,17 @@ export const TransfersView: React.FC<TransfersViewProps> = ({
         ))}
       </SelectBox>
 
-      <div>
-        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
-          {language === 'sw' ? 'Aina ya Chombo' : 'Category'}
-        </label>
-        <div className="flex items-center gap-2">
-          <SelectBox
-            icon="two_wheeler"
-            size="sm"
-            value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value as 'ALL' | VehicleType)}
-            className="flex-1"
-          >
-            <option value="ALL">{t.allCategories}</option>
-            <option value="2W">{language === 'sw' ? 'Pikipiki (2W)' : '2-Wheelers (2W)'}</option>
-            <option value="3W">{language === 'sw' ? 'Bajaji (3W)' : '3-Wheelers (3W)'}</option>
-          </SelectBox>
-          <button
-            type="button"
-            onClick={handleResetFilters}
-            className="h-[34px] px-2.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors flex items-center justify-center cursor-pointer shadow-2xs shrink-0"
-            title={language === 'sw' ? 'Safisha vichujio' : 'Reset filters'}
-          >
-            <span className="material-symbols-outlined text-sm">restart_alt</span>
-          </button>
-        </div>
-      </div>
+      <SelectBox
+        label={language === 'sw' ? 'Aina ya Chombo' : 'Category'}
+        icon="two_wheeler"
+        size="sm"
+        value={selectedType}
+        onChange={(e) => setSelectedType(e.target.value as 'ALL' | VehicleType)}
+      >
+        <option value="ALL">{t.allCategories}</option>
+        <option value="2W">{language === 'sw' ? 'Pikipiki (2W)' : '2-Wheelers (2W)'}</option>
+        <option value="3W">{language === 'sw' ? 'Bajaji (3W)' : '3-Wheelers (3W)'}</option>
+      </SelectBox>
     </div>
   );
 
@@ -316,6 +301,8 @@ export const TransfersView: React.FC<TransfersViewProps> = ({
             : 'Search by Chassis, Model, Officer, or Branch...'
         }
         filterComponent={transferFilters}
+        onResetFilters={handleResetFilters}
+        exportLabel="Export Excel"
         exportFileName="rekodi-za-uhamisho"
       />
     </div>

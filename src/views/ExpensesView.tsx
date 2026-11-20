@@ -465,6 +465,8 @@ export const ExpensesView: React.FC<ExpensesViewProps> = ({
             : 'Search by receipt number, description, or staff...'
         }
         filterComponent={expenseFilters}
+        onResetFilters={handleResetFilters}
+        exportLabel="Export Excel"
         exportFileName="rekodi-za-matumizi"
       />
 

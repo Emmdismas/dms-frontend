@@ -142,35 +142,20 @@ export const CustomersView: React.FC<CustomersViewProps> = ({
 
   const customerFilters = (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      <div>
-        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
-          {language === 'sw' ? 'Tawi Lililosajili Mteja' : 'Registered Branch'}
-        </label>
-        <div className="flex items-center gap-2">
-          <SelectBox
-            icon="storefront"
-            size="sm"
-            value={selectedBranchId}
-            onChange={(e) => setSelectedBranchId(e.target.value)}
-            className="flex-1"
-          >
-            <option value="ALL">{t.allBranches}</option>
-            {branches.map((b) => (
-              <option key={b.id} value={b.id}>
-                {b.name}
-              </option>
-            ))}
-          </SelectBox>
-          <button
-            type="button"
-            onClick={handleResetFilters}
-            className="h-[34px] px-2.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 transition-colors flex items-center justify-center cursor-pointer shadow-2xs shrink-0"
-            title={language === 'sw' ? 'Safisha vichujio' : 'Reset filters'}
-          >
-            <span className="material-symbols-outlined text-sm">restart_alt</span>
-          </button>
-        </div>
-      </div>
+      <SelectBox
+        label={language === 'sw' ? 'Tawi Lililosajili Mteja' : 'Registered Branch'}
+        icon="storefront"
+        size="sm"
+        value={selectedBranchId}
+        onChange={(e) => setSelectedBranchId(e.target.value)}
+      >
+        <option value="ALL">{t.allBranches}</option>
+        {branches.map((b) => (
+          <option key={b.id} value={b.id}>
+            {b.name}
+          </option>
+        ))}
+      </SelectBox>
     </div>
   );
 
@@ -275,6 +260,8 @@ export const CustomersView: React.FC<CustomersViewProps> = ({
             : 'Search customer by Name, Phone, NIDA, or Location...'
         }
         filterComponent={customerFilters}
+        onResetFilters={handleResetFilters}
+        exportLabel="Export Excel"
         exportFileName="rekodi-za-wateja"
       />
     </div>

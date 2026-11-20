@@ -23,7 +23,10 @@ export interface DataTableProps<T> {
   searchPlaceholder?: string;
   onSearchChange?: (term: string) => void;
   filterComponent?: React.ReactNode;
+  onResetFilters?: () => void;
   exportFileName?: string;
+  exportLabel?: string;
+  defaultShowFilters?: boolean;
   actions?: React.ReactNode;
   initialPageSize?: number;
   maxHeight?: string;
@@ -91,7 +94,10 @@ export function DataTable<T>({
   searchPlaceholder,
   onSearchChange,
   filterComponent,
+  onResetFilters,
   exportFileName = 'export-data',
+  exportLabel,
+  defaultShowFilters = false,
   actions,
   initialPageSize = 10,
   maxHeight = '500px',
@@ -100,7 +106,7 @@ export function DataTable<T>({
   rowClassName,
   onRowClick,
   enableExport = true,
-  enableDensityToggle = true,
+  enableDensityToggle = false,
 }: DataTableProps<T>) {
   const isSw = language === 'sw';
 
@@ -111,7 +117,7 @@ export function DataTable<T>({
   const [density, setDensity] = useState<'compact' | 'comfortable'>('compact');
   const [sortKey, setSortKey] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(defaultShowFilters);
   const [exportFeedback, setExportFeedback] = useState(false);
 
   // Search filter
@@ -259,88 +265,144 @@ export function DataTable<T>({
 
   return (
     <div className="w-full space-y-3">
-      {/* 1. STATIONARY CONTROL TOOLBAR (Strict Enterprise Standard) */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-3 border border-slate-200/90 dark:border-slate-800 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
-        {/* Left: Search & Table Info */}
-        <div className="flex items-center gap-2.5 flex-1 min-w-0">
-          {/* Quick Search Input */}
-          <div className="relative flex-1 max-w-md">
-            <span className="material-symbols-outlined absolute left-3 top-2 text-slate-400 text-[18px]">
-              search
-            </span>
-            <input
-              type="text"
-              placeholder={searchPlaceholder || (isSw ? 'Tafuta kwa haraka kwenye jedwali...' : 'Search within table...')}
-              value={searchTerm}
-              onChange={(e) => handleSearch(e.target.value)}
-              className="w-full pl-9 pr-8 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-[#006948] transition-all"
-            />
-            {searchTerm && (
-              <button
-                type="button"
-                onClick={() => handleSearch('')}
-                className="absolute right-2.5 top-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
-              >
-                <span className="material-symbols-outlined text-[16px]">close</span>
-              </button>
-            )}
-          </div>
-
-          {/* Filter Toggle Button (if filterComponent provided) */}
-          {filterComponent && (
+      {/* 1. TOP ACTION & FILTER TOOLBAR (Faithful to benchmark Image 2) */}
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-3 border border-slate-200/90 dark:border-slate-800 shadow-xs flex items-center justify-between gap-3 flex-wrap">
+        {/* Left: Filters Toggle Button (Funnel icon filter_alt from Image 2) */}
+        <div className="flex items-center gap-3">
+          {filterComponent ? (
             <button
               type="button"
               onClick={() => setShowFilters(!showFilters)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 border transition-all cursor-pointer shrink-0 ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 border transition-all cursor-pointer shadow-2xs ${
                 showFilters
-                  ? 'bg-emerald-50 dark:bg-emerald-950/60 text-[#006948] dark:text-emerald-300 border-emerald-300 dark:border-emerald-800 shadow-xs'
-                  : 'bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/60 text-[#006948] dark:text-emerald-300 border-emerald-400 dark:border-emerald-700 ring-2 ring-emerald-500/15'
+                  : 'bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700'
               }`}
             >
-              <span className="material-symbols-outlined text-[16px]">tune</span>
-              <span className="hidden sm:inline">{isSw ? 'Vichujio' : 'Filters'}</span>
+              <span className="material-symbols-outlined text-[18px] text-slate-600 dark:text-slate-300">
+                filter_alt
+              </span>
+              <span>{isSw ? 'Filters' : 'Filters'}</span>
             </button>
-          )}
+          ) : title ? (
+            <span className="text-sm font-bold text-slate-800 dark:text-white font-sans">
+              {title}
+            </span>
+          ) : null}
 
-          {title && (
+          {title && filterComponent && (
             <span className="hidden xl:inline-block text-xs font-bold text-slate-500 dark:text-slate-400 font-sans truncate">
               {title}
             </span>
           )}
         </div>
 
-        {/* Right: Per-Page, Density Toggle & CSV Export */}
-        <div className="flex items-center gap-2 flex-wrap justify-end shrink-0">
-          {/* Per Page Selector with styled dropdown chevron */}
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-            <span className="text-[11px] font-medium hidden sm:inline">{isSw ? 'Onyesha:' : 'Show:'}</span>
-            <div className="relative inline-flex items-center">
-              <select
-                value={pageSize}
-                onChange={(e) => {
-                  setPageSize(Number(e.target.value));
-                  setCurrentPage(1);
-                }}
-                className="appearance-none pl-2.5 pr-6 py-1.5 text-xs font-bold rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all cursor-pointer shadow-2xs"
-              >
-                {[5, 10, 25, 50, 100].map((num) => (
-                  <option key={num} value={num}>
-                    {num} {isSw ? 'safu' : 'rows'}
-                  </option>
-                ))}
-              </select>
-              <span className="material-symbols-outlined text-[15px] absolute right-1.5 text-slate-400 pointer-events-none select-none">
-                unfold_more
+        {/* Right: Export & Reset Filters Actions (Matching Image 2 top right buttons) */}
+        <div className="flex items-center gap-2 flex-wrap">
+          {enableExport && (
+            <button
+              type="button"
+              onClick={handleExportCSV}
+              className={`px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 border transition-all cursor-pointer shadow-2xs ${
+                exportFeedback
+                  ? 'bg-emerald-600 text-white border-emerald-600'
+                  : 'bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700'
+              }`}
+              title={isSw ? 'Pakua ripoti ya Excel/CSV' : 'Export Excel / CSV table report'}
+            >
+              <span className="material-symbols-outlined text-[18px] text-slate-600 dark:text-slate-300">
+                {exportFeedback ? 'check_circle' : 'download'}
               </span>
-            </div>
+              <span>
+                {exportFeedback
+                  ? (isSw ? 'Imepakuliwa!' : 'Exported!')
+                  : (exportLabel || (isSw ? 'Export Excel' : 'Export Excel'))}
+              </span>
+            </button>
+          )}
+
+          {onResetFilters && (
+            <button
+              type="button"
+              onClick={onResetFilters}
+              className="px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 border transition-all cursor-pointer shadow-2xs bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700"
+              title={isSw ? 'Safisha vichujio vyote' : 'Reset all active filters'}
+            >
+              <span className="material-symbols-outlined text-[18px] text-slate-600 dark:text-slate-300">
+                restart_alt
+              </span>
+              <span>{isSw ? 'Reset Filters' : 'Reset Filters'}</span>
+            </button>
+          )}
+
+          {actions}
+        </div>
+      </div>
+
+      {/* 2. COLLAPSIBLE FILTER CONTAINER (Directly below Filters button) */}
+      {filterComponent && showFilters && (
+        <div className="p-4 bg-slate-50/90 dark:bg-slate-900/90 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-2xs animate-in fade-in slide-in-from-top-1 duration-150">
+          {filterComponent}
+        </div>
+      )}
+
+      {/* 3. TABLE CONTROLS ROW: Show [entries] on left, Search on right (Matching Image 2) */}
+      <div className="bg-white dark:bg-slate-900 rounded-2xl px-4 py-2.5 border border-slate-200/90 dark:border-slate-800 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        {/* Left: Show [ 10 ⌄ ] entries */}
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 select-none">
+          <span>Show</span>
+          <div className="relative inline-flex items-center">
+            <select
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+                setCurrentPage(1);
+              }}
+              className="appearance-none pl-3 pr-7 py-1.5 text-xs sm:text-sm font-bold rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 hover:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all cursor-pointer shadow-2xs"
+            >
+              {[5, 10, 25, 50, 100].map((num) => (
+                <option key={num} value={num}>
+                  {num}
+                </option>
+              ))}
+            </select>
+            <span className="material-symbols-outlined text-[16px] absolute right-1.5 text-slate-400 pointer-events-none select-none">
+              expand_more
+            </span>
+          </div>
+          <span>entries</span>
+        </div>
+
+        {/* Right: Search: [             ] */}
+        <div className="flex items-center gap-2 justify-end">
+          <label className="text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 whitespace-nowrap select-none">
+            Search:
+          </label>
+          <div className="relative w-48 sm:w-64">
+            <input
+              type="text"
+              placeholder={searchPlaceholder || ''}
+              value={searchTerm}
+              onChange={(e) => handleSearch(e.target.value)}
+              className="w-full pl-3 pr-8 py-1.5 text-xs sm:text-sm rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-[#006948] focus:border-[#006948] transition-all shadow-2xs"
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => handleSearch('')}
+                className="absolute right-2 top-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+              >
+                <span className="material-symbols-outlined text-[16px]">close</span>
+              </button>
+            )}
           </div>
 
-          {/* Density Toggle */}
+          {/* Optional Density Toggle */}
           {enableDensityToggle && (
             <button
               type="button"
               onClick={() => setDensity(density === 'compact' ? 'comfortable' : 'compact')}
-              className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all cursor-pointer"
+              className="p-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all cursor-pointer shadow-2xs shrink-0"
               title={
                 density === 'compact'
                   ? isSw
@@ -356,39 +418,8 @@ export function DataTable<T>({
               </span>
             </button>
           )}
-
-          {/* Export CSV Button */}
-          {enableExport && (
-            <button
-              type="button"
-              onClick={handleExportCSV}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 border transition-all cursor-pointer ${
-                exportFeedback
-                  ? 'bg-emerald-600 text-white border-emerald-600'
-                  : 'bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
-              }`}
-              title={isSw ? 'Pakua ripoti ya CSV' : 'Export CSV table report'}
-            >
-              <span className="material-symbols-outlined text-[16px] text-emerald-600 dark:text-emerald-400">
-                {exportFeedback ? 'check_circle' : 'download'}
-              </span>
-              <span className="hidden sm:inline">
-                {exportFeedback ? (isSw ? 'Imepakuliwa!' : 'Exported!') : 'CSV'}
-              </span>
-            </button>
-          )}
-
-          {/* Custom Actions Slot */}
-          {actions}
         </div>
       </div>
-
-      {/* 2. OPTIONAL COLLAPSIBLE FILTER CONTAINER */}
-      {filterComponent && showFilters && (
-        <div className="p-3.5 bg-slate-50 dark:bg-slate-900/90 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xs animate-in fade-in slide-in-from-top-1 duration-150">
-          {filterComponent}
-        </div>
-      )}
 
       {/* 3. DEDICATED VERTICAL SCROLLER ("Kascroller" Container with Sticky Header) */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xs overflow-hidden">
