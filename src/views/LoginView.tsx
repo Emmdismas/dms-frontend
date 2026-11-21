@@ -55,7 +55,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
   };
 
   return (
-    <div className="min-h-screen w-full relative flex flex-col justify-between overflow-x-hidden font-sans select-none">
+    <div className="min-h-[100dvh] w-full relative flex flex-col justify-between overflow-x-hidden font-sans select-none">
       {/* ========================================================================= */}
       {/* 1. BRIGHT REAL AUTOMOTIVE BACKGROUND (With Gentle Ambient Zoom)          */}
       {/* ========================================================================= */}
@@ -84,38 +84,40 @@ export const LoginView: React.FC<LoginViewProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. TOP GLASS NAVIGATION BAR (Sliding in from TOP)                        */}
+      {/* 2. COMPACT MOBILE-FIRST TOP GLASS NAVIGATION BAR (Slide from TOP)        */}
       {/* ========================================================================= */}
-      <header className="relative z-20 w-full px-4 sm:px-8 py-4 animate-slide-top">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 backdrop-blur-xl bg-white/10 dark:bg-black/25 border border-white/20 rounded-2xl px-4 sm:px-6 py-2.5 shadow-lg shadow-black/20">
-          {/* Left Brand Identity */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-md shadow-black/20 flex items-center justify-center shrink-0 border border-white/40">
+      <header className="relative z-20 w-full px-3.5 sm:px-8 py-3 sm:py-4 animate-slide-top">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 backdrop-blur-xl bg-white/10 dark:bg-black/25 border border-white/20 rounded-2xl px-3.5 sm:px-6 py-2 sm:py-2.5 shadow-lg shadow-black/20">
+          {/* Left Brand Identity: Responsive DMS on Mobile, Full on Desktop */}
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white p-1 shadow-md shadow-black/20 flex items-center justify-center shrink-0 border border-white/40">
               <img
                 src="/DMS-logo.png"
                 alt="DMS Logo"
                 className="w-full h-full object-contain"
               />
             </div>
-            <div>
-              <div className="text-sm sm:text-base font-extrabold tracking-tight text-white leading-tight">
-                Dealer <span className="text-emerald-400">Management</span> System
+            <div className="min-w-0">
+              <div className="text-sm sm:text-base font-extrabold tracking-tight text-white leading-tight truncate">
+                <span className="sm:hidden">DMS Portal</span>
+                <span className="hidden sm:inline">Dealer <span className="text-emerald-400">Management</span> System</span>
               </div>
-              <div className="text-[10px] text-emerald-300 font-semibold tracking-wider uppercase font-mono">
-                2W & 3W ERP • Multi-Brand Platform
+              <div className="text-[10px] text-emerald-300 font-semibold tracking-wider uppercase font-mono truncate">
+                <span className="sm:hidden">2W & 3W ERP</span>
+                <span className="hidden sm:inline">2W & 3W ERP • Multi-Brand Platform</span>
               </div>
             </div>
           </div>
 
-          {/* Right Controls: Dark/Light Mode & Language Switcher */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Right Controls: Dark/Light Mode & Language Switcher (44px touch targets) */}
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Dark / Light Mode Toggle Button */}
             {onToggleTheme && (
               <button
                 type="button"
                 onClick={onToggleTheme}
                 title={isDarkMode ? 'Switch to Bright Light Mode' : 'Switch to Dark Mode'}
-                className="p-2 rounded-xl backdrop-blur-md bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all cursor-pointer shadow-xs active:scale-95 flex items-center justify-center"
+                className="min-w-[38px] min-h-[38px] p-2 rounded-xl backdrop-blur-md bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all cursor-pointer shadow-xs active:scale-95 flex items-center justify-center"
               >
                 <span className="material-symbols-outlined text-[18px] text-amber-300">
                   {isDarkMode ? 'light_mode' : 'dark_mode'}
@@ -128,7 +130,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
               <button
                 type="button"
                 onClick={() => language !== 'en' && onToggleLanguage()}
-                className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                className={`min-h-[34px] px-2.5 py-1 text-xs font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
                   language === 'en'
                     ? 'bg-[#006948] text-white shadow-xs'
                     : 'text-white/80 hover:text-white'
@@ -140,7 +142,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
               <button
                 type="button"
                 onClick={() => language !== 'sw' && onToggleLanguage()}
-                className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                className={`min-h-[34px] px-2.5 py-1 text-xs font-bold rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
                   language === 'sw'
                     ? 'bg-[#006948] text-white shadow-xs'
                     : 'text-white/80 hover:text-white'
@@ -155,15 +157,15 @@ export const LoginView: React.FC<LoginViewProps> = ({
       </header>
 
       {/* ========================================================================= */}
-      {/* 3. MAIN HERO CONTENT (Choreographed Entrance Animations)                  */}
+      {/* 3. MAIN CONTENT: FOCUSED GLASS FORM ON MOBILE, SPLIT ON DESKTOP           */}
       {/* ========================================================================= */}
-      <main className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 my-auto">
+      <main className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-10 my-auto flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* ===================================================================== */}
-          {/* LEFT: HERO HEADLINE (From LEFT) & SUBTEXT/CHIPS (From BOTTOM)         */}
+          {/* LEFT: HERO HEADLINE (Desktop Only: hidden on mobile for clean speed)  */}
           {/* ===================================================================== */}
-          <div className="order-2 lg:order-1 w-full lg:col-span-7 xl:col-span-7 space-y-6 text-white text-center lg:text-left">
+          <div className="hidden lg:block order-2 lg:order-1 w-full lg:col-span-7 xl:col-span-7 space-y-6 text-white text-left">
             
             {/* Top Eyebrow & Headline: Slide in smoothly from the LEFT */}
             <div className="space-y-4 animate-slide-left">
@@ -196,14 +198,14 @@ export const LoginView: React.FC<LoginViewProps> = ({
             {/* Subtext, Chips & Trust Badges: Slide in smoothly from the BOTTOM */}
             <div className="space-y-6 animate-slide-bottom">
               {/* Short, Generalized Subtext */}
-              <p className="text-sm sm:text-base text-white/90 max-w-xl leading-relaxed font-normal mx-auto lg:mx-0 drop-shadow-sm">
+              <p className="text-sm sm:text-base text-white/90 max-w-xl leading-relaxed font-normal drop-shadow-sm">
                 {isSw
                   ? 'Jukwaa huru la kidijitali la kudhibiti namba za Chassis (VIN), stoo ya matawi nchini, na mauzo ya mikopo na taslimu kwa aina zote za vyombo vya moto.'
                   : 'Universal enterprise platform tracking 17-digit Chassis VINs, nationwide branch inventory, customer registries, and cash & credit sales across all vehicle makes.'}
               </p>
 
               {/* Universal Category Chips */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-1">
+              <div className="flex flex-wrap items-center justify-start gap-2.5 pt-1">
                 <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl backdrop-blur-md bg-white/10 border border-white/20 text-white text-xs font-semibold shadow-xs">
                   <span className="text-base">🛵</span>
                   <span>{isSw ? 'Pikipiki (2-Wheeler)' : 'Two-Wheelers (2W)'}</span>
@@ -223,7 +225,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
               </div>
 
               {/* Universal Trust Highlights */}
-              <div className="pt-4 border-t border-white/15 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-white/80 font-medium">
+              <div className="pt-4 border-t border-white/15 flex flex-wrap items-center justify-start gap-4 sm:gap-6 text-xs text-white/80 font-medium">
                 <span className="flex items-center gap-1.5">
                   <span className="text-emerald-400 font-bold">✓</span>
                   <span>{isSw ? 'Uthibitisho wa VIN ya Tarakimu 17' : '17-Digit VIN Tracking'}</span>
@@ -242,17 +244,18 @@ export const LoginView: React.FC<LoginViewProps> = ({
           </div>
 
           {/* ========================================================================= */}
-          {/* RIGHT: FLOATING FROSTED GLASS LOGIN CARD (Slides in smoothly from RIGHT)  */}
+          {/* RIGHT: FLOATING FROSTED GLASS LOGIN CARD                                  */}
+          {/* (Slides from BOTTOM on mobile for touch UX; from RIGHT on desktop)        */}
           {/* ========================================================================= */}
-          <div className="order-1 lg:order-2 w-full lg:col-span-5 xl:col-span-5 max-w-md mx-auto lg:max-w-none animate-slide-right">
-            <div className="relative rounded-3xl p-6 sm:p-8 backdrop-blur-2xl bg-slate-900/40 dark:bg-black/55 border border-white/30 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] ring-1 ring-white/15 overflow-hidden">
+          <div className="w-full lg:col-span-5 xl:col-span-5 max-w-md mx-auto lg:max-w-none animate-slide-bottom lg:animate-slide-right">
+            <div className="relative rounded-3xl p-5 sm:p-8 backdrop-blur-2xl bg-slate-900/50 dark:bg-black/60 border border-white/30 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.65)] ring-1 ring-white/15 overflow-hidden">
               {/* Inner ambient glass reflection */}
               <div className="absolute -top-20 -right-20 w-44 h-44 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -bottom-20 -left-20 w-44 h-44 bg-teal-400/20 rounded-full blur-3xl pointer-events-none" />
 
               {/* Card Header */}
-              <div className="relative z-10 mb-6">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full backdrop-blur-md bg-white/15 border border-white/20 text-emerald-300 text-[11px] font-bold uppercase tracking-wider mb-2.5 shadow-2xs">
+              <div className="relative z-10 mb-5 sm:mb-6">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full backdrop-blur-md bg-white/15 border border-white/20 text-emerald-300 text-[11px] font-bold uppercase tracking-wider mb-2 shadow-2xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   <span>{isSw ? 'Ingia Kwenye Mfumo' : 'Enterprise Portal Access'}</span>
                 </div>
@@ -274,9 +277,9 @@ export const LoginView: React.FC<LoginViewProps> = ({
                 </div>
               )}
 
-              {/* Glassmorphic Form Fields */}
+              {/* Glassmorphic Form Fields Optimized for Mobile Keyboards */}
               <form onSubmit={handleSubmit} className="relative z-10 space-y-4">
-                {/* 1. Identifier Field */}
+                {/* 1. Identifier Field (No Auto-Capitalize, direct email keyboard on phones) */}
                 <div>
                   <label
                     htmlFor="login-identifier"
@@ -285,7 +288,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                     {isSw ? 'Barua Pepe / Simu / Kodi ya Dealer' : 'Email / Phone / Dealer Code'}
                   </label>
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-3.5 top-3 text-white/60 text-lg pointer-events-none select-none">
+                    <span className="material-symbols-outlined absolute left-3.5 top-3.5 text-white/60 text-lg pointer-events-none select-none">
                       account_circle
                     </span>
                     <input
@@ -294,6 +297,10 @@ export const LoginView: React.FC<LoginViewProps> = ({
                       type="text"
                       required
                       autoComplete="username"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
+                      inputMode="email"
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
                       placeholder={
@@ -301,12 +308,12 @@ export const LoginView: React.FC<LoginViewProps> = ({
                           ? 'Email, 0713759553, au C-DAR-N00988'
                           : 'Email, Phone, or Dealer Code'
                       }
-                      className="w-full pl-11 pr-4 py-3 text-xs sm:text-sm backdrop-blur-md bg-white/10 dark:bg-black/30 border border-white/25 rounded-2xl text-white placeholder-white/50 focus:outline-hidden focus:ring-2 focus:ring-emerald-400 focus:border-emerald-300 focus:bg-white/20 transition-all font-medium shadow-inner"
+                      className="w-full pl-11 pr-4 py-3 sm:py-3.5 text-sm backdrop-blur-md bg-white/10 dark:bg-black/30 border border-white/25 rounded-2xl text-white placeholder-white/50 focus:outline-hidden focus:ring-2 focus:ring-emerald-400 focus:border-emerald-300 focus:bg-white/20 transition-all font-medium shadow-inner"
                     />
                   </div>
                 </div>
 
-                {/* 2. Password Field */}
+                {/* 2. Password Field (No Auto-Capitalize) */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <label
@@ -317,7 +324,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
                     </label>
                   </div>
                   <div className="relative">
-                    <span className="material-symbols-outlined absolute left-3.5 top-3 text-white/60 text-lg pointer-events-none select-none">
+                    <span className="material-symbols-outlined absolute left-3.5 top-3.5 text-white/60 text-lg pointer-events-none select-none">
                       lock
                     </span>
                     <input
@@ -326,16 +333,19 @@ export const LoginView: React.FC<LoginViewProps> = ({
                       type={showPassword ? 'text' : 'password'}
                       required
                       autoComplete="current-password"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="w-full pl-11 pr-11 py-3 text-xs sm:text-sm backdrop-blur-md bg-white/10 dark:bg-black/30 border border-white/25 rounded-2xl text-white placeholder-white/50 focus:outline-hidden focus:ring-2 focus:ring-emerald-400 focus:border-emerald-300 focus:bg-white/20 transition-all font-medium shadow-inner"
+                      className="w-full pl-11 pr-11 py-3 sm:py-3.5 text-sm backdrop-blur-md bg-white/10 dark:bg-black/30 border border-white/25 rounded-2xl text-white placeholder-white/50 focus:outline-hidden focus:ring-2 focus:ring-emerald-400 focus:border-emerald-300 focus:bg-white/20 transition-all font-medium shadow-inner"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
                       aria-label={showPassword ? 'Hide password' : 'Show password'}
-                      className="absolute right-3.5 top-2.5 text-white/60 hover:text-white p-1 rounded-lg cursor-pointer transition-colors"
+                      className="min-w-[40px] min-h-[40px] absolute right-2 top-1.5 text-white/60 hover:text-white p-2 rounded-lg cursor-pointer transition-colors flex items-center justify-center"
                     >
                       <span className="material-symbols-outlined text-lg">
                         {showPassword ? 'visibility_off' : 'visibility'}
@@ -344,11 +354,11 @@ export const LoginView: React.FC<LoginViewProps> = ({
                   </div>
                 </div>
 
-                {/* Vibrant High-Energy CTA Button */}
+                {/* Vibrant High-Energy CTA Button (Full thumb touch-target min-h 48px) */}
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3.5 px-6 bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl shadow-black/40 hover:shadow-emerald-500/30 transition-all active:scale-[0.99] cursor-pointer disabled:opacity-70 mt-5 border border-white/25"
+                  className="min-h-[48px] w-full py-3.5 px-6 bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-black/40 hover:shadow-emerald-500/30 transition-all active:scale-[0.99] cursor-pointer disabled:opacity-70 mt-5 border border-white/25"
                 >
                   {isLoading ? (
                     <>
@@ -365,7 +375,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
               </form>
 
               {/* Frosted Card Footer */}
-              <div className="relative z-10 mt-6 pt-4 border-t border-white/15 flex items-center justify-between text-xs text-white/70 font-medium">
+              <div className="relative z-10 mt-5 sm:mt-6 pt-3.5 sm:pt-4 border-t border-white/15 flex items-center justify-between text-xs text-white/70 font-medium">
                 <span className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
                   <span>SSL Encrypted</span>
@@ -379,9 +389,9 @@ export const LoginView: React.FC<LoginViewProps> = ({
       </main>
 
       {/* ========================================================================= */}
-      {/* 4. CLEAN BOTTOM BAR (Sliding in from Bottom)                              */}
+      {/* 4. CLEAN BOTTOM BAR (Desktop only, hidden on mobile per Rule 10)           */}
       {/* ========================================================================= */}
-      <footer className="relative z-20 w-full py-3 px-4 sm:px-8 text-center text-xs text-white/70 animate-slide-bottom">
+      <footer className="hidden sm:block relative z-20 w-full py-3 px-4 sm:px-8 text-center text-xs text-white/70 animate-slide-bottom">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 border-t border-white/10 pt-3">
           <div>© 2026 Dealer Management System (DMS) • Tanzania Operations</div>
           <div className="font-mono text-[11px] text-white/60">
