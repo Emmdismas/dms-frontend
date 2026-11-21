@@ -163,9 +163,9 @@ export const LoginView: React.FC<LoginViewProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* ===================================================================== */}
-          {/* LEFT: HERO HEADLINE (Desktop Only: hidden on mobile for clean speed)  */}
+          {/* LEFT: HERO HEADLINE (Desktop: columns 1-7; hidden on mobile)         */}
           {/* ===================================================================== */}
-          <div className="hidden lg:block order-2 lg:order-1 w-full lg:col-span-7 xl:col-span-7 space-y-6 text-white text-left">
+          <div className="hidden lg:block w-full lg:col-span-7 xl:col-span-7 space-y-6 text-white text-left">
             
             {/* Top Eyebrow & Headline: Slide in smoothly from the LEFT */}
             <div className="space-y-4 animate-slide-left">
@@ -244,10 +244,9 @@ export const LoginView: React.FC<LoginViewProps> = ({
           </div>
 
           {/* ========================================================================= */}
-          {/* RIGHT: FLOATING FROSTED GLASS LOGIN CARD                                  */}
-          {/* (Slides from BOTTOM on mobile for touch UX; from RIGHT on desktop)        */}
+          {/* RIGHT: FLOATING FROSTED GLASS LOGIN CARD (Desktop: columns 8-12, RIGHT)   */}
           {/* ========================================================================= */}
-          <div className="w-full lg:col-span-5 xl:col-span-5 max-w-md mx-auto lg:max-w-none animate-slide-bottom lg:animate-slide-right">
+          <div className="w-full lg:col-span-5 xl:col-span-5 max-w-md mx-auto lg:max-w-none lg:ml-auto animate-slide-bottom lg:animate-slide-right">
             <div className="relative rounded-3xl p-5 sm:p-8 backdrop-blur-2xl bg-slate-900/50 dark:bg-black/60 border border-white/30 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.65)] ring-1 ring-white/15 overflow-hidden">
               {/* Inner ambient glass reflection */}
               <div className="absolute -top-20 -right-20 w-44 h-44 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none" />
